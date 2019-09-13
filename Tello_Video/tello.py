@@ -141,7 +141,7 @@ class Tello:
 
         """
 
-        print(">> send cmd: {}".format(command))
+        print(f">> send cmd: {command}")
         self.abort_flag = False
         timer = threading.Timer(self.command_timeout, self.set_abort_flag)
 

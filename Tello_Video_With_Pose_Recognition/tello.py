@@ -4,6 +4,7 @@ import time
 import numpy as np
 import libh264decoder
 
+
 class Tello:
     """Wrapper class to interact with the Tello drone."""
 
@@ -25,7 +26,7 @@ class Tello:
         self.decoder = libh264decoder.H264Decoder()
         self.command_timeout = command_timeout
         self.imperial = imperial
-        self.response = None  
+        self.response = None
         self.frame = None  # numpy array BGR -- current camera output frame
         self.is_freeze = False  # freeze current camera output
         self.last_frame = None
@@ -44,9 +45,9 @@ class Tello:
 
         # to receive video -- send cmd: command, streamon
         self.socket.sendto(b'command', self.tello_address)
-        print ('sent: command')
+        print('sent: command')
         self.socket.sendto(b'streamon', self.tello_address)
-        print ('sent: streamon')
+        print('sent: streamon')
 
         self.socket_video.bind((local_ip, self.local_video_port))
 
@@ -61,7 +62,7 @@ class Tello:
 
         self.socket.close()
         self.socket_video.close()
-    
+
     def read(self):
         """Return the last frame from camera."""
         if self.is_freeze:
@@ -84,9 +85,9 @@ class Tello:
         while True:
             try:
                 self.response, ip = self.socket.recvfrom(3000)
-                #print(self.response)
+                # print(self.response)
             except socket.error as exc:
-                print ("Caught exception socket.error : %s" % exc)
+                print(f"Caught exception socket.error : {exc}")
 
     def _receive_video_thread(self):
         """
@@ -107,8 +108,8 @@ class Tello:
                     packet_data = ""
 
             except socket.error as exc:
-                print ("Caught exception socket.error : %s" % exc)
-    
+                print(f"Caught exception socket.error : {exc}")
+
     def _h264_decode(self, packet_data):
         """
         decode raw h264 format data from Tello
@@ -140,7 +141,7 @@ class Tello:
 
         """
 
-        print (">> send cmd: {}".format(command))
+        print(f">> send cmd: {command}")
         self.abort_flag = False
         timer = threading.Timer(self.command_timeout, self.set_abort_flag)
 
@@ -151,7 +152,7 @@ class Tello:
             if self.abort_flag is True:
                 break
         timer.cancel()
-        
+
         if self.response is None:
             response = 'none_response'
         else:
@@ -160,7 +161,7 @@ class Tello:
         self.response = None
 
         return response
-    
+
     def set_abort_flag(self):
         """
         Sets self.abort_flag to True.
@@ -209,7 +210,7 @@ class Tello:
         else:
             speed = int(round(speed * 27.7778))
 
-        return self.send_command('speed %s' % speed)
+        return self.send_command(f'speed {speed}')
 
     def rotate_cw(self, degrees):
         """
@@ -223,7 +224,7 @@ class Tello:
 
         """
 
-        return self.send_command('cw %s' % degrees)
+        return self.send_command(f'cw {degrees}')
 
     def rotate_ccw(self, degrees):
         """
@@ -236,7 +237,7 @@ class Tello:
             str: Response from Tello, 'OK' or 'FALSE'.
 
         """
-        return self.send_command('ccw %s' % degrees)
+        return self.send_command(f'ccw {degrees}')
 
     def flip(self, direction):
         """
@@ -250,7 +251,7 @@ class Tello:
 
         """
 
-        return self.send_command('flip %s' % direction)
+        return self.send_command(f'flip {direction}')
 
     def get_response(self):
         """
@@ -260,8 +261,7 @@ class Tello:
             int: response of tello.
 
         """
-        response = self.response
-        return response
+        return self.response
 
     def get_height(self):
         """Returns height(dm) of tello.
@@ -288,7 +288,7 @@ class Tello:
             int: Percent battery life remaining.
 
         """
-        
+
         battery = self.send_command('battery?')
 
         try:
@@ -372,7 +372,7 @@ class Tello:
         else:
             distance = int(round(distance * 100))
 
-        return self.send_command('%s %s' % (direction, distance))
+        return self.send_command(f'{direction} {distance}')
 
     def move_backward(self, distance):
         """Moves backward for a distance.
