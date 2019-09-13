@@ -5,7 +5,6 @@ import numpy as np
 import datetime
 import os
 
-
 '''
 Correspondence between the number of the skeleton node and 
 the human body:
@@ -15,31 +14,31 @@ Right Knee - 9, Right Ankle - 10, Left Hip - 11, Left Knee - 12,
 Left Ankle - 13, Chest - 14, Background - 15
 '''
 
+
 class Tello_Pose:
     def __init__(self):
 
         # read the path of the trained model of the neural network for pose recognition
         self.protoFile = "model/pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt"
         self.weightsFile = "model/pose/mpi/pose_iter_160000.caffemodel"
-        
+
         # total number of the skeleton nodes
         self.nPoints = 15
-        
+
         # read the neural network of the pose recognition
         self.net = cv2.dnn.readNetFromCaffe(self.protoFile, self.weightsFile)
 
         # count the number of frames,and after every certain number of frames
         # is read, frame_cnt will be cleared and recounted.
-        self.frame_cnt = 0 
-        self.arm_down_45_cnt = 0 # count numbers of the arm_dowm_45 captured in every certain number of frames
-        self.arm_flat_cnt = 0    # count numbers of the arm_flat captured in every certain number of frames
-        self.arm_V_cnt = 0       # count numbers of the arm_V captured in every certain number of frames
-        
+        self.frame_cnt = 0
+        self.arm_down_45_cnt = 0  # count numbers of the arm_dowm_45 captured in every certain number of frames
+        self.arm_flat_cnt = 0  # count numbers of the arm_flat captured in every certain number of frames
+        self.arm_V_cnt = 0  # count numbers of the arm_V captured in every certain number of frames
+
         # the period of pose reconigtion,it depends on your computer performance 
         self.period = 0
         # record how many times the period of pose reconigtion is calculated.
-        self.period_calculate_cnt =0
-        
+        self.period_calculate_cnt = 0
 
     def getAngle(self, start, end):
         """
@@ -68,7 +67,7 @@ class Tello_Pose:
         if points[2] and points[3] and points[4]:
             # calculate the shoulder angle
             shoulder_angle = self.getAngle(points[2], points[3])
-           
+
             if -60 < shoulder_angle < -20:
                 elbow_angle = self.getAngle(points[3], points[4])
                 # if arm is straight
@@ -81,7 +80,7 @@ class Tello_Pose:
             # correct the dimension
             if shoulder_angle < 0:
                 shoulder_angle = shoulder_angle + 360
-          
+
             if 200 < shoulder_angle < 240:
                 elbow_angle = self.getAngle(points[6], points[7])
                 if elbow_angle < 0:
@@ -106,7 +105,7 @@ class Tello_Pose:
         """
         right = False
         if points[2] and points[3] and points[4]:
-            
+
             shoulder_angle = self.getAngle(points[2], points[3])
             # if arm is flat
             if -10 < shoulder_angle < 40:
@@ -114,15 +113,15 @@ class Tello_Pose:
                 # if arm is straight
                 if abs(elbow_angle - shoulder_angle) < 30:
                     right = True
-           
+
         left = False
         if points[5] and points[6] and points[7]:
-            shoulder_angle = self.getAngle(points[5], points[6])            
+            shoulder_angle = self.getAngle(points[5], points[6])
             # correct the  dimension            
             if shoulder_angle < 0:
-                shoulder_angle = shoulder_angle + 360            
-            
-            # if arm is flat
+                shoulder_angle = shoulder_angle + 360
+
+                # if arm is flat
             if 140 < shoulder_angle < 190:
                 elbow_angle = self.getAngle(points[6], points[7])
                 if elbow_angle < 0:
@@ -152,7 +151,7 @@ class Tello_Pose:
 
             if -60 < shoulder_angle < -20:
                 elbow_angle = self.getAngle(points[3], points[4])
-                if 0 < elbow_angle < 90 :
+                if 0 < elbow_angle < 90:
                     right = True
 
         left = False
@@ -163,7 +162,7 @@ class Tello_Pose:
                 shoulder_angle = shoulder_angle + 360
             if 200 < shoulder_angle < 240:
                 elbow_angle = self.getAngle(points[6], points[7])
-                if  90 < elbow_angle < 180:
+                if 90 < elbow_angle < 180:
                     left = True
 
         # If at least one arm meets the requirements, it is considered a successful capture
@@ -171,7 +170,6 @@ class Tello_Pose:
             return True
         else:
             return False
-        
 
     def detect(self, frame):
         """
@@ -189,7 +187,7 @@ class Tello_Pose:
 
         frame_cnt_threshold = 0
         prob_threshold = 0.05
-        pose_captured_threshold = 0    
+        pose_captured_threshold = 0
 
         draw_skeleton_flag = False
 
@@ -203,17 +201,17 @@ class Tello_Pose:
         inpBlob = cv2.dnn.blobFromImage(frame, 1.0 / 255, (inWidth, inHeight),
                                         (0, 0, 0), swapRB=False, crop=False)
         self.net.setInput(inpBlob)
-        
+
         # get the output of the neural network and calculate the period of the process
         period_starttime = time.time()
         output = self.net.forward()
         period_endtime = time.time()
-        
+
         # calculation the period of pose reconigtion for 6 times,and get the average value 
-        if self.period_calculate_cnt <= 5 :
+        if self.period_calculate_cnt <= 5:
             self.period = self.period + period_endtime - period_starttime
             self.period_calculate_cnt = self.period_calculate_cnt + 1
-            if self.period_calculate_cnt == 6 :
+            if self.period_calculate_cnt == 6:
                 self.period = self.period / 6
 
         H = output.shape[2]
@@ -221,7 +219,6 @@ class Tello_Pose:
 
         # Empty list to store the detected keypoints
         points = []
-
 
         for i in range(self.nPoints):
             # confidence map of corresponding body's part.
@@ -233,36 +230,36 @@ class Tello_Pose:
             # Scale the point to fit on the original image
             x = (frameWidth * point[0]) / W
             y = (frameHeight * point[1]) / H
-            
+
             if prob > prob_threshold:
                 points.append((int(x), int(y)))
                 draw_skeleton_flag = True
             else:
-                points.append(None) 
+                points.append(None)
                 draw_skeleton_flag = False
 
         # check the captured pose
         if self.is_arms_down_45(points):
             self.arm_down_45_cnt += 1
-            print "%d:arm down captured"%self.frame_cnt
+            print(f"{self.frame_cnt}:arm down captured")
 
         if self.is_arms_flat(points):
             self.arm_flat_cnt += 1
-            print "%d:arm up captured"%self.frame_cnt
+            print(f"{self.frame_cnt}:arm up captured")
 
         if self.is_arms_V(points):
             self.arm_V_cnt += 1
-            print '%d:arm V captured'%self.frame_cnt
+            print(f'{self.frame_cnt}:arm V captured')
 
         self.frame_cnt += 1
-       
+
         # set the frame_cnt_threshold and pose_captured_threshold according to 
         # the period of the pose recognition
-        cmd = ''        
+        cmd = ''
         if self.period < 0.3:
             frame_cnt_threshold = 5
             pose_captured_threshold = 4
-        elif self.period >= 0.3 and self.period <0.6:
+        elif 0.6 < self.period >= 0.3:
             frame_cnt_threshold = 4
             pose_captured_threshold = 3
         elif self.period >= 0.6:
@@ -273,17 +270,17 @@ class Tello_Pose:
         # certain times of pose recognition   
         if self.frame_cnt == frame_cnt_threshold:
             if self.arm_down_45_cnt >= pose_captured_threshold:
-                print '!!!arm up,move back!!!'
-                cmd =  'moveback'
+                print('!!!arm up, move back!!!')
+                cmd = 'moveback'
             if self.arm_flat_cnt >= pose_captured_threshold:
-                print '!!!arm down,moveforward!!!'
-                cmd =  'moveforward'
-            if self.arm_V_cnt == self.frame_cnt :
-                print '!!!arm V,land!!!'
-                cmd =  'land'
+                print('!!!arm down, move forward!!!')
+                cmd = 'moveforward'
+            if self.arm_V_cnt == self.frame_cnt:
+                print('!!!arm V, land!!!')
+                cmd = 'land'
             self.frame_cnt = 0
             self.arm_down_45_cnt = 0
             self.arm_flat_cnt = 0
             self.arm_V_cnt = 0
 
-        return cmd,draw_skeleton_flag,points
+        return cmd, draw_skeleton_flag, points
