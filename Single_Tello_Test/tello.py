@@ -1,12 +1,13 @@
 import socket
 import threading
 import time
-from stats import Stats
+from .stats import Stats
+
 
 class Tello:
-    def __init__(self):
-        self.local_ip = ''
-        self.local_port = 8889
+    def __init__(self, local_ip='', local_port=8889, tello_ip='192.168.10.1', tello_port=8889, max_timeout=15.0):
+        self.local_ip = local_ip
+        self.local_port = local_port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # socket for sending cmd
         self.socket.bind((self.local_ip, self.local_port))
 
@@ -15,12 +16,12 @@ class Tello:
         self.receive_thread.daemon = True
         self.receive_thread.start()
 
-        self.tello_ip = '192.168.10.1'
-        self.tello_port = 8889
-        self.tello_adderss = (self.tello_ip, self.tello_port)
+        self.tello_ip = tello_ip
+        self.tello_port = tello_port
+        self.tello_address = (self.tello_ip, self.tello_port)
         self.log = []
 
-        self.MAX_TIME_OUT = 15.0
+        self.max_timeout = max_timeout
 
     def send_command(self, command):
         """
@@ -34,19 +35,19 @@ class Tello:
         """
         self.log.append(Stats(command, len(self.log)))
 
-        self.socket.sendto(command.encode('utf-8'), self.tello_adderss)
-        print 'sending command: %s to %s' % (command, self.tello_ip)
+        self.socket.sendto(command.encode('utf-8'), self.tello_address)
+        print(f'sending command: {command} to {self.tello_ip}')
 
         start = time.time()
         while not self.log[-1].got_response():
             now = time.time()
             diff = now - start
-            if diff > self.MAX_TIME_OUT:
-                print 'Max timeout exceeded... command %s' % command
+            if diff > self.max_timeout:
+                print(f'Max timeout exceeded... command {command}')
                 # TODO: is timeout considered failure or next command still get executed
                 # now, next one got executed
                 return
-        print 'Done!!! sent command: %s to %s' % (command, self.tello_ip)
+        print(f'Done!!! sent command: {command} to {self.tello_ip}')
 
     def _receive_thread(self):
         """Listen to responses from the Tello.
@@ -60,8 +61,8 @@ class Tello:
                 print('from %s: %s' % (ip, self.response))
 
                 self.log[-1].add_response(self.response)
-            except socket.error, exc:
-                print "Caught exception socket.error : %s" % exc
+            except socket.error:
+                print(f"Caught exception socket.error : {socket.error}")
 
     def on_close(self):
         pass
@@ -71,4 +72,3 @@ class Tello:
 
     def get_log(self):
         return self.log
-
