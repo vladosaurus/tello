@@ -18,13 +18,14 @@ video_sock.bind(('', 11111))
 cmd_mux = threading.Lock()
 
 
-def command(msg: bytes):
+def command(msg: bytes, debug=False):
     _f = str(inspect.stack()[0][3])
 
     cmd_mux.acquire()
     try:
         command_sock.sendto(msg, command_address)
-        print(f"{_f}: sent '{msg}'")
+        if debug:
+            print(f"{_f}: sent '{msg}'")
     except Exception as e:
         print(f"{_f}: error: {e}")
         cmd_mux.release()
@@ -33,14 +34,16 @@ def command(msg: bytes):
     return None
 
 
-def command_receiver():
+def command_receiver(debug=False):
     _f = str(inspect.stack()[0][3])
-    print(f"{_f}: ready")
+    if debug:
+        print(f"{_f}: ready")
 
     while True:
         try:
             data = command_sock.recv(32)
-            print(f"{_f}: drone response: {data}")
+            if debug:
+                print(f"{_f}: drone response: {data}")
         except Exception as e:
             print(f"{_f}: error: {e}")
             break
@@ -68,13 +71,14 @@ def video_receiver():
             break
 
 
-def battery_ping():
+def battery_ping(debug=False):
     _f = str(inspect.stack()[0][3])
 
     while True:
         time.sleep(5)
-        print(f"{_f}: sent ping")
-        if command(b'battery?') is not None:
+        if debug:
+            print(f"{_f}: sent ping")
+        if command(b'battery?', debug=debug) is not None:
             break
 
 
