@@ -1,10 +1,11 @@
 from datetime import datetime
 
+
 class Stats:
-    def __init__(self, command, id):
+    def __init__(self, command, _id):
         self.command = command
         self.response = None
-        self.id = id
+        self.id = _id
 
         self.start_time = datetime.now()
         self.end_time = None
@@ -21,25 +22,21 @@ class Stats:
         return diff.total_seconds()
 
     def print_stats(self):
-        print '\nid: %s' % self.id
-        print 'command: %s' % self.command
-        print 'response: %s' % self.response
-        print 'start time: %s' % self.start_time
-        print 'end_time: %s' % self.end_time
-        print 'duration: %s\n' % self.duration
+        print(f'\nid: {self.id}')
+        print(f'command: {self.command}')
+        print(f'response: {self.response}')
+        print(f'start time: {self.start_time}')
+        print(f'end_time: {self.end_time}')
+        print(f'duration: {self.duration}\n')
 
     def got_response(self):
-        if self.response is None:
-            return False
-        else:
-            return True
+        return self.response is not None
 
     def return_stats(self):
-        str = ''
-        str +=  '\nid: %s\n' % self.id
-        str += 'command: %s\n' % self.command
-        str += 'response: %s\n' % self.response
-        str += 'start time: %s\n' % self.start_time
-        str += 'end_time: %s\n' % self.end_time
-        str += 'duration: %s\n' % self.duration
-        return str
+        stats_msg = f'\nid: {self.id}\n' \
+            f'command: {self.command}\n' \
+            f'response: {self.response}\n' \
+            f'start time: {self.start_time}\n' \
+            f'end_time: {self.end_time}\n' \
+            f'duration: {self.duration}\n'
+        return stats_msg
