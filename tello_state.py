@@ -5,10 +5,10 @@ import curses
 INTERVAL = 0.2
 
 
-
 def report(str):
     stdscr.addstr(0, 0, str)
     stdscr.refresh()
+
 
 if __name__ == "__main__":
     stdscr = curses.initscr()
@@ -41,5 +41,3 @@ if __name__ == "__main__":
         curses.echo()
         curses.nocbreak()
         curses.endwin()
-
-
