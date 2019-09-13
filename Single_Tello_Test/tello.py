@@ -61,8 +61,8 @@ class Tello:
                 print('from %s: %s' % (ip, self.response))
 
                 self.log[-1].add_response(self.response)
-            except socket.error:
-                print(f"Caught exception socket.error : {socket.error}")
+            except socket.error as se:
+                print(f"Caught exception socket.error : {se}")
 
     def on_close(self):
         pass
