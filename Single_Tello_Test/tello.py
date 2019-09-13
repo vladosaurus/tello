@@ -1,7 +1,7 @@
 import socket
 import threading
 import time
-from .stats import Stats
+from stats import Stats
 
 
 class Tello:

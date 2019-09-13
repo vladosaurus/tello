@@ -1,5 +1,5 @@
-from .tello import Tello
-from .tello_control_ui import TelloUI
+from tello import Tello
+from tello_control_ui import TelloUI
 
 
 def main():
