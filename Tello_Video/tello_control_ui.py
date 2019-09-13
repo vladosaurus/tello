@@ -97,7 +97,7 @@ class TelloUI:
                     thread_tmp = threading.Thread(target=self._updateGUIImage,args=(image,))
                     thread_tmp.start()
                     time.sleep(0.03)                                                            
-        except RuntimeError, e:
+        except RuntimeError as e:
             print("[INFO] caught a RuntimeError")
 
            
