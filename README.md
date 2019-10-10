@@ -6,7 +6,7 @@ This is a collection of python-based sample code that interact with the Ryze Tel
 
 ## Project Description
 
-This toolkit contains three sample programs based on tello sdk and python2.7,including Single_Tello_Test, Tello_Video, and Tello_Video (With_Pose_Recognition). There is also a program file named tello_state.py.
+This toolkit contains three sample programs based on tello sdk and Python 3.7, including Single_Tello_Test, Tello_Video, and Tello_Video (With_Pose_Recognition). There is also a program file named tello_state.py.
 
 - **Single_Tello_Test**
 
