@@ -7,6 +7,8 @@ import sys
 import threading
 import time
 
+# SDK docs: https://terra-1-g.djicdn.com/2d4dce68897a46b19fc717f3576b7c6a/Tello%20%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/For%20Tello/Tello%20SDK%20Documentation%20EN_1.3_1122.pdf
+
 # Create a UDP socket
 command_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 command_sock.bind(('', 9000))
@@ -18,6 +20,7 @@ video_sock.bind(('', 11111))
 cmd_mux = threading.Lock()
 
 
+# Command sender
 def command(msg: bytes, debug=False):
     _f = str(inspect.stack()[0][3])
 
@@ -34,6 +37,7 @@ def command(msg: bytes, debug=False):
     return None
 
 
+# Command receiver
 def command_receiver(debug=False):
     _f = str(inspect.stack()[0][3])
     if debug:
@@ -49,6 +53,7 @@ def command_receiver(debug=False):
             break
 
 
+# Receive video data from the drone
 def video_receiver():
     _f = str(inspect.stack()[0][3])
     print(f"{_f}: ready")
@@ -64,6 +69,7 @@ def video_receiver():
         except Exception as e:
             print(f"{_f}: error: {e}")
             video_file.close()
+            # Some video players have trouble playing the file as-is from the drone, so ffmpeg is used to mux it to an mp4 file
             if os.stat(filename).st_size > 0:
                 p = subprocess.Popen(['ffmpeg', '-framerate', '30', '-i', filename, '-c', 'copy', f'{filename}.mp4'])
                 p.wait()
@@ -71,6 +77,7 @@ def video_receiver():
             break
 
 
+# While in command mode, the drone safely lands on its own after not receiving any commands for 15 seconds - this ping prevents that from happenning
 def battery_ping(debug=False):
     _f = str(inspect.stack()[0][3])
 
