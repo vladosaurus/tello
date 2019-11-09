@@ -3,12 +3,13 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 16:28:50 2019
+# Created: Sat Nov  9 18:39:23 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtWidgets, QtGui
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -87,6 +88,11 @@ class Ui_MainWindow(object):
         self.bDown_2.setObjectName("bDown_2")
         self.gButtons.addWidget(self.bDown_2, 2, 0, 1, 1)
         self.bPitchUp = QtWidgets.QPushButton(self.gridLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bPitchUp.sizePolicy().hasHeightForWidth())
+        self.bPitchUp.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.bPitchUp.setFont(font)
@@ -118,6 +124,11 @@ class Ui_MainWindow(object):
         self.bBack_2.setObjectName("bBack_2")
         self.gButtons.addWidget(self.bBack_2, 2, 1, 1, 1)
         self.bPitchDown = QtWidgets.QPushButton(self.gridLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bPitchDown.sizePolicy().hasHeightForWidth())
+        self.bPitchDown.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.bPitchDown.setFont(font)
@@ -125,6 +136,11 @@ class Ui_MainWindow(object):
         self.bPitchDown.setObjectName("bPitchDown")
         self.gButtons.addWidget(self.bPitchDown, 3, 2, 1, 1)
         self.bPitchReset = QtWidgets.QPushButton(self.gridLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bPitchReset.sizePolicy().hasHeightForWidth())
+        self.bPitchReset.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.bPitchReset.setFont(font)
@@ -155,6 +171,25 @@ class Ui_MainWindow(object):
         self.bUp_2.setAutoRepeatDelay(100)
         self.bUp_2.setObjectName("bUp_2")
         self.gButtons.addWidget(self.bUp_2, 2, 2, 1, 1)
+        self.leSpeed = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.leSpeed.sizePolicy().hasHeightForWidth())
+        self.leSpeed.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(12)
+        self.leSpeed.setFont(font)
+        self.leSpeed.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.leSpeed.setObjectName("leSpeed")
+        self.gButtons.addWidget(self.leSpeed, 4, 1, 1, 2)
+        self.label = QtWidgets.QLabel(self.gridLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.gButtons.addWidget(self.label, 4, 0, 1, 1)
         self.gRoot.addLayout(self.gButtons, 1, 0, 1, 1)
         self.teCommands = QtWidgets.QPlainTextEdit(self.gridLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -195,9 +230,6 @@ class Ui_MainWindow(object):
         self.bAddCommand.setObjectName("bAddCommand")
         self.hCommands.addWidget(self.bAddCommand)
         self.gRoot.addLayout(self.hCommands, 2, 0, 1, 1)
-        self.wMatPlotLib = QtWidgets.QWidget(self.gridLayoutWidget)
-        self.wMatPlotLib.setObjectName("wMatPlotLib")
-        self.gRoot.addWidget(self.wMatPlotLib, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.sbStatusBar = QtWidgets.QStatusBar(MainWindow)
         self.sbStatusBar.setObjectName("sbStatusBar")
@@ -243,6 +275,8 @@ class Ui_MainWindow(object):
         self.bForward_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "8", None, -1))
         self.bUp_2.setText(QtWidgets.QApplication.translate("MainWindow", "Up", None, -1))
         self.bUp_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "3", None, -1))
+        self.leSpeed.setText(QtWidgets.QApplication.translate("MainWindow", "60", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("MainWindow", "Speed", None, -1))
         self.bAddCommand.setText(QtWidgets.QApplication.translate("MainWindow", "Add Command", None, -1))
         self.bAddCommand.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Return", None, -1))
 
