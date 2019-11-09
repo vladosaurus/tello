@@ -16,12 +16,13 @@ class Drone:
         '''Set up Drone object with start coordinates
         '''
         self.current_coordinates = numpy.array([0, 0, 0])
-        self.trajectory = numpy.array([0, 0, 0])
+        self.trajectory = numpy.array([[0, 0, 0]])
 
     def get_current_coord(self) -> numpy.array:
         return self.current_coordinates
 
     def get_trajectory(self) -> numpy.array:
+        print(self.trajectory.T)
         return numpy.array(self.trajectory.T)
 
     def receive_go(self, x: int, y: int, z: int):
@@ -68,6 +69,9 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
         self.drone.receive_go(x, y, z)
         coords = self.drone.get_trajectory()
         self.plot.draw_plot(*coords)  # call Fun for Graph plot
+
+    def command_rotate(self, rotation: int):
+        print('Rotating...')
 
     def reset(self):
         self.drone = Drone()
