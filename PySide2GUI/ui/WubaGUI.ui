@@ -48,8 +48,8 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="bUp_2">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="bTakeOffLand_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -57,39 +57,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Up</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="bTurnRight_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Turn Right</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="bForward_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Forward</string>
+          <string>TakeOff / Land</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -112,6 +80,54 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="bForward_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Forward</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="bDown_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Down</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="bTurnRight_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Turn Right</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="bShtrafeLeft_2">
          <property name="sizePolicy">
@@ -128,8 +144,8 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="bTakeOffLand_2">
+       <item row="2" column="2">
+        <widget class="QPushButton" name="bUp_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -137,7 +153,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>TakeOff / Land</string>
+          <string>Up</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -160,16 +176,30 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="bDown_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="bPitchUp">
          <property name="text">
-          <string>Down</string>
+          <string>Pitch Up</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="bPitchDown">
+         <property name="text">
+          <string>Pitch Down</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="bPitchReset">
+         <property name="text">
+          <string>Pitch Reset</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -218,6 +248,9 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QWidget" name="wMatPlotLib" native="true"/>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -233,11 +266,203 @@
    <hints>
     <hint type="sourcelabel">
      <x>74</x>
-     <y>116</y>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>84</x>
      <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bForward_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_forward()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bTurnRight_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_turn_right()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>322</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bShtrafeLeft_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_strafe_left()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>78</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bTakeOffLand_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_takeoff_land()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bStrafeRight_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_strafe_right()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>316</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bDown_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_down()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>302</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>419</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bBack_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bUp_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_up()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>317</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bAddCommand</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_add_command()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>601</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>634</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bPitchUp</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_pitch_up()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>106</x>
+     <y>455</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bPitchReset</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_pitch_reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>456</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bPitchDown</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_pitch_down()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>358</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -253,5 +478,8 @@
   <slot>on_back()</slot>
   <slot>on_up()</slot>
   <slot>on_add_command()</slot>
+  <slot>on_pitch_up()</slot>
+  <slot>on_pitch_down()</slot>
+  <slot>on_pitch_reset()</slot>
  </slots>
 </ui>

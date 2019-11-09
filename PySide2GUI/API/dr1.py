@@ -79,6 +79,7 @@ def video_receiver():
 
 # While in command mode, the drone safely lands on its own after not receiving any commands for 15 seconds - this ping prevents that from happenning
 def battery_ping(debug=False):
+<<<<<<< HEAD
 	_f = str(inspect.stack()[0][3])
 	while True:
 		time.sleep(5)
@@ -88,6 +89,17 @@ def battery_ping(debug=False):
 				break
 
 
+=======
+    _f = str(inspect.stack()[0][3])
+    while True:
+        time.sleep(5)
+        if debug:
+            print(f"{_f}: sent ping")
+        if command(b'battery?', debug=debug) is not None:
+            break
+
+# VAR. I
+>>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
 def movements(t_mov, dst):
 	"""
 	Surprise motherf*cker...
@@ -102,6 +114,7 @@ def movements(t_mov, dst):
 		'takeoff': f'takeoff',
 		'land': f'land'
 	}.get(t_mov, 'Incorrect command')
+<<<<<<< HEAD
 
 
 def angles(type_n, degr):
@@ -123,7 +136,25 @@ def no_params(cmd):
 			'takeoff': f'takeoff',
 			'land': f'land',
 	}.get(cmd, 'Incorrect command')
+=======
+>>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
 
+def angles(type_n, degr):
+    """
+    Surprise motherf*cker...
+    """
+    return {
+        'cw': f'cw {degr}',
+        'ccw': f'ccw {degr}'
+    }.get(type_n, 'Incorrect command')
+
+def no_params(cmd):
+    return{
+        'command': f'command',
+        'takeoff': f'takeoff',
+        'land': f'land',
+
+    }.get(cmd, 'Incorrect command')
 
 command_thread = threading.Thread(target=command_receiver)
 command_thread.start()
@@ -135,6 +166,7 @@ keep_alive_thread = threading.Thread(target=battery_ping)
 keep_alive_thread.start()
 
 if __name__ == "__main__":
+<<<<<<< HEAD
 	print("=============================================================================")
 	print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
 	print("=============================================================================")
@@ -159,3 +191,47 @@ if __name__ == "__main__":
 				print('closing connections...')
 				command_sock.close()
 				video_sock.close()
+=======
+   print("=============================================================================")
+   print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
+   print("=============================================================================")
+   print("welcome")
+   # while True:
+   #     try:
+   #         msg = input("")
+   #         if not msg:
+   #             continue
+   #         # command(bytes(msg, 'utf-8'))
+   #         command(bytes(movements(type_m, dist1), 'utf-8'))
+   #     except KeyboardInterrupt:
+   #         print('closing connections...')
+   #         command_sock.close()
+   #         video_sock.close()
+   #         print('waiting for threads...')
+   #         keep_alive_thread.join()
+   #         command_thread.join()
+   #         video_thread.join()
+   #         print('goodbye')
+   #         break
+
+f = open("../../Single_Tello_Test/command.txt", "r")
+commands = f.readlines()
+
+try:
+    for task in commands:
+        if len(task.split()) == 1:
+            command(bytes(no_params(task.strip()), 'utf-8'))
+        elif len(task.split()) == 2:
+            tmv, prop = task.split()
+            if tmv == "cw" or "ccw":
+                command(bytes(angles(tmv, prop), 'utf-8'))
+            command(bytes(movements(tmv, prop), 'utf-8'))
+        else:
+            continue
+
+except KeyboardInterrupt:
+    print('closing connections...')
+    command_sock.close()
+    video_sock.close()
+
+>>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
