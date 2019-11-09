@@ -46,28 +46,44 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # ------------------------
 
     def on_turn_left(self):
+        # coord = (0, 0, self.VERTICAL_MOVE)
+        # self.plot.command_go(*coord)
         self.append_command(degrees("ccw", self.ROTATION_MOVE))
 
     def on_turn_right(self):
+        # coord = (0, 0, self.VERTICAL_MOVE)
+        # self.plot.command_go(*coord)
         self.append_command(degrees("cw", self.ROTATION_MOVE))
 
     def on_forward(self):
-        self.append_command(go(self.HORIZONTAL_MOVE, 0, 0, self.leSpeed.text()))
+        coord = (self.HORIZONTAL_MOVE, 0, 0)
+        self.plot.command_go(*coord)
+        self.append_command(go(*coord, self.leSpeed.text()))
 
     def on_back(self):
-        self.append_command(go(-self.HORIZONTAL_MOVE, 0, 0, self.leSpeed.text()))
+        coord = (-self.HORIZONTAL_MOVE, 0, 0)
+        self.plot.command_go(*coord)
+        self.append_command(go(*coord, self.leSpeed.text()))
 
     def on_strafe_left(self):
-        self.append_command(go(0, -self.HORIZONTAL_MOVE, 0, self.leSpeed.text()))
+        coord = (0, -self.HORIZONTAL_MOVE, 0)
+        self.plot.command_go(*coord)
+        self.append_command(go(*coord, self.leSpeed.text()))
 
     def on_strafe_right(self):
-        self.append_command(go(0, self.HORIZONTAL_MOVE, 0, self.leSpeed.text()))
+        coord = (0, self.HORIZONTAL_MOVE, 0)
+        self.plot.command_go(*coord)
+        self.teCommands.appendPlainText(go(*coord, self.leSpeed.text()))
 
     def on_down(self):
-        self.append_command(go(0, 0, -self.VERTICAL_MOVE, self.leSpeed.text()))
+        coord = (0, 0, -self.VERTICAL_MOVE)
+        self.plot.command_go(*coord)
+        self.append_command(go(*coord, self.leSpeed.text()))
 
     def on_up(self):
-        self.append_command(go(0, 0, self.VERTICAL_MOVE, self.leSpeed.text()))
+        coord = (0, 0, self.VERTICAL_MOVE)
+        self.plot.command_go(*coord)
+        self.append_command(go(*coord, self.leSpeed.text()))
 
     def on_add_command(self):
         command = self.command_text.split(" ")[0]

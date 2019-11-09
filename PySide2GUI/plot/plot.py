@@ -15,29 +15,21 @@ class Drone:
     def __init__(self):
         '''Set up Drone object with start coordinates
         '''
-        self.current_coordinates = numpy.array([[0, 0, 0]]).T
-        #self.plot = Plot()
+        self.current_coordinates = numpy.array([0, 0, 0])
+        self.trajectory = numpy.array([0, 0, 0])
 
     def get_current_coord(self) -> numpy.array:
         return self.current_coordinates
 
-    def receive_movement(self, direction: str, distance: int):
-        '''[summary]
+    def get_trajectory(self) -> numpy.array:
+        return numpy.array(self.trajectory.T)
 
-        :param direction: Per API this can be up, down,
-        :type direction: string
-        :param distance: [description]
-        :type distance: int
+    def receive_go(self, x: int, y: int, z: int):
+        self.current_coordinates[0] += x
+        self.current_coordinates[1] += y
+        self.current_coordinates[2] += z
 
-        # 		'left': f'left {dst}',
-        # 		'right': f'right {dst}',
-        # 		'forward': f'forward {dst}',
-        # 		'back': f'back {dst}',
-        # 		'takeoff': f'takeoff',
-        # 		'land': f'land'
-        '''
-        if direction.lower() == 'up':
-            self.current_coordinates[2] += distance
+        self.trajectory = numpy.vstack((self.trajectory, self.current_coordinates))
 
 
 class PlotWindow(FigureCanvas):  # Class for 3D window
@@ -72,9 +64,9 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
         self.setLayout(MainLayout)  # sets Main layout
 
 
-    def fly_up(self):
-        self.drone.receive_movement('up', 10)
-        coords = self.drone.get_current_coord()
+    def command_go(self, x=10, y=10, z=10):
+        self.drone.receive_go(x, y, z)
+        coords = self.drone.get_trajectory()
         self.plot.draw_plot(*coords)  # call Fun for Graph plot
 
     #     # TODO: Draw arrows, direction

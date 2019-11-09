@@ -16,14 +16,14 @@ class TestGraph(TestCase):
     def test_receive_up_twice(self):
         drone = plot.Drone()
 
-        drone.receive_movement('up', 10)
+        drone.receive_go(0, 0, 10)
 
         expected_result = numpy.array([[0, 0, 10]]).T
 
         numpy.testing.assert_array_equal(
             drone.get_current_coord(), expected_result)
 
-        drone.receive_movement('up', 15)
+        drone.receive_go(0, 0, 15)
 
         expected_result = numpy.array([[0, 0, 25]]).T
 
