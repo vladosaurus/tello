@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 22:56:34 2019
+# Created: Sat Nov  9 23:03:51 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,6 +39,7 @@ class Ui_MainWindow(object):
         self.bShtrafeLeft_2.setObjectName("bShtrafeLeft_2")
         self.gButtons.addWidget(self.bShtrafeLeft_2, 1, 0, 1, 1)
         self.bTakeOffLand_2 = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.bTakeOffLand_2.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
