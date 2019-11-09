@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1080</width>
     <height>720</height>
    </rect>
   </property>
@@ -22,8 +22,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>799</width>
-      <height>719</height>
+      <width>1071</width>
+      <height>721</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gRoot">
@@ -43,6 +43,9 @@
          <property name="text">
           <string>Turn Left</string>
          </property>
+         <property name="shortcut">
+          <string>7</string>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -58,6 +61,12 @@
          </property>
          <property name="text">
           <string>TakeOff / Land</string>
+         </property>
+         <property name="shortcut">
+          <string>5</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -75,6 +84,9 @@
          <property name="text">
           <string>Strafe Right</string>
          </property>
+         <property name="shortcut">
+          <string>6</string>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -90,6 +102,9 @@
          </property>
          <property name="text">
           <string>Forward</string>
+         </property>
+         <property name="shortcut">
+          <string>8</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -107,6 +122,9 @@
          <property name="text">
           <string>Down</string>
          </property>
+         <property name="shortcut">
+          <string>1</string>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -122,6 +140,9 @@
          </property>
          <property name="text">
           <string>Turn Right</string>
+         </property>
+         <property name="shortcut">
+          <string>9</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -139,6 +160,9 @@
          <property name="text">
           <string>Strafe Left</string>
          </property>
+         <property name="shortcut">
+          <string>4</string>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -155,6 +179,9 @@
          <property name="text">
           <string>Up</string>
          </property>
+         <property name="shortcut">
+          <string>3</string>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -170,6 +197,9 @@
          </property>
          <property name="text">
           <string>Back</string>
+         </property>
+         <property name="shortcut">
+          <string>2</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -213,7 +243,7 @@
        <item>
         <widget class="QLineEdit" name="lineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -233,6 +263,9 @@
          </property>
          <property name="text">
           <string>Add Command</string>
+         </property>
+         <property name="shortcut">
+          <string>Return</string>
          </property>
         </widget>
        </item>
