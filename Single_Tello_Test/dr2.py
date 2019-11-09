@@ -148,19 +148,16 @@ if __name__ == "__main__":
     tello = Tello()
     for clean_cmd in clean_cmds:
         try:
-            if len(msg.split()) == 1:
-                #command(bytes(no_params(msg), 'utf-8'))
-                send_command(no_params(msg))
+            if len(clean_cmd.split()) == 1:
+                tello.send_command(command(bytes(no_params(clean_cmd), 'utf-8')))
 
-            elif len(msg.split()) == 2:
-                cmd, num = msg.split()
+            elif len(clean_cmd.split()) == 2:
+                cmd, num = clean_cmd.split()
                 if cmd in ['cw', 'ccw']:
-                    #command(bytes(angles(cmd, num), 'utf-8'))
-                    send_command(angles(cmd, num))
+                    tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
 
                 else:
-                    #command(bytes(movements(cmd, num), 'utf-8'))
-                    send_command(movements(cmd, num))
+                    tello.send_command(command(bytes(movements(cmd, num), 'utf-8')))
 
             elif len(msg.split()) == 5:
                 cmd, x, y, z, speed = msg.split()
