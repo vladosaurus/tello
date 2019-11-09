@@ -6,6 +6,7 @@ import subprocess
 import sys
 import threading
 import time
+from tello import Tello
 
 # SDK docs: https://terra-1-g.djicdn.com/2d4dce68897a46b19fc717f3576b7c6a/Tello%20%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/For%20Tello/Tello%20SDK%20Documentation%20EN_1.3_1122.pdf
 
@@ -140,18 +141,26 @@ if __name__ == "__main__":
     print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
     print("=============================================================================")
     print("welcome")
-    while True:
+    with open('command.txt', 'r') as txt:
+        commands = txt.readlines()
+        clean_cmds = [w.strip() for w in commands]
+
+    tello = Tello()
+    for clean_cmd in clean_cmds:
         try:
-            msg = input("")
-            # if not msg:
-            #     continue
             if len(msg.split()) == 1:
-                command(bytes(no_params(msg), 'utf-8'))
+                #command(bytes(no_params(msg), 'utf-8'))
+                send_command(no_params(msg))
 
             elif len(msg.split()) == 2:
                 cmd, num = msg.split()
                 if cmd in ['cw', 'ccw']:
-                    command(bytes(angles(cmd, num), 'utf-8'))
+                    #command(bytes(angles(cmd, num), 'utf-8'))
+                    send_command(angles(cmd, num))
+
+                else:
+                    #command(bytes(movements(cmd, num), 'utf-8'))
+                    send_command(movements(cmd, num))
 
             elif len(msg.split()) == 5:
                 cmd, x, y, z, speed = msg.split()
