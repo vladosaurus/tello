@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>Wubalubadubdub</string>
   </property>
-  <property name="toolTip">
-   <string>Pickle Riiiiiick!</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
@@ -51,6 +48,9 @@
          <property name="shortcut">
           <string>4</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -78,6 +78,9 @@
          <property name="checkable">
           <bool>false</bool>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -101,6 +104,9 @@
          </property>
          <property name="shortcut">
           <string>7</string>
+         </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -126,6 +132,9 @@
          <property name="shortcut">
           <string>9</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -150,6 +159,9 @@
          <property name="shortcut">
           <string>1</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -170,6 +182,9 @@
          </property>
          <property name="text">
           <string>Pitch Up</string>
+         </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -195,6 +210,9 @@
          <property name="shortcut">
           <string>6</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -219,6 +237,9 @@
          <property name="shortcut">
           <string>2</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -240,6 +261,9 @@
          <property name="text">
           <string>Pitch Down</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -260,6 +284,9 @@
          </property>
          <property name="text">
           <string>Pitch Reset</string>
+         </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -285,6 +312,9 @@
          <property name="shortcut">
           <string>8</string>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
@@ -308,6 +338,9 @@
          </property>
          <property name="shortcut">
           <string>3</string>
+         </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -419,7 +452,7 @@
  <connections>
   <connection>
    <sender>bTurnLeft_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_turn_left()</slot>
    <hints>
@@ -435,7 +468,7 @@
   </connection>
   <connection>
    <sender>bForward_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_forward()</slot>
    <hints>
@@ -451,7 +484,7 @@
   </connection>
   <connection>
    <sender>bTurnRight_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_turn_right()</slot>
    <hints>
@@ -467,7 +500,7 @@
   </connection>
   <connection>
    <sender>bShtrafeLeft_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_strafe_left()</slot>
    <hints>
@@ -483,7 +516,7 @@
   </connection>
   <connection>
    <sender>bTakeOffLand_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_takeoff_land()</slot>
    <hints>
@@ -499,7 +532,7 @@
   </connection>
   <connection>
    <sender>bStrafeRight_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_strafe_right()</slot>
    <hints>
@@ -515,7 +548,7 @@
   </connection>
   <connection>
    <sender>bDown_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_down()</slot>
    <hints>
@@ -531,7 +564,7 @@
   </connection>
   <connection>
    <sender>bBack_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_back()</slot>
    <hints>
@@ -547,7 +580,7 @@
   </connection>
   <connection>
    <sender>bUp_2</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_up()</slot>
    <hints>
@@ -579,7 +612,7 @@
   </connection>
   <connection>
    <sender>bPitchUp</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_pitch_up()</slot>
    <hints>
@@ -595,7 +628,7 @@
   </connection>
   <connection>
    <sender>bPitchReset</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_pitch_reset()</slot>
    <hints>
@@ -611,7 +644,7 @@
   </connection>
   <connection>
    <sender>bPitchDown</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_pitch_down()</slot>
    <hints>
