@@ -89,6 +89,7 @@ def battery_ping(debug=False):
             break
 
 
+
 command_thread = threading.Thread(target=command_receiver)
 command_thread.start()
 
@@ -103,22 +104,23 @@ if __name__ == "__main__":
     print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
     print("=============================================================================")
     print("welcome")
-    while True:
-        try:
-            msg = input("")
-            if not msg:
-                continue
-            command(bytes(msg, 'utf-8'))
 
-        except KeyboardInterrupt:
-            print('closing connections...')
-            command_sock.close()
-            video_sock.close()
-
-            print('waiting for threads...')
-            keep_alive_thread.join()
-            command_thread.join()
-            video_thread.join()
-
-            print('goodbye')
-            break
+    # while True:
+    #     try:
+    #         msg = input("")
+    #         if not msg:
+    #             continue
+    #         command(bytes(msg, 'utf-8'))
+    #
+    #     except KeyboardInterrupt:
+    #         print('closing connections...')
+    #         command_sock.close()
+    #         video_sock.close()
+    #
+    #         print('waiting for threads...')
+    #         keep_alive_thread.join()
+    #         command_thread.join()
+    #         video_thread.join()
+    #
+    #         print('goodbye')
+    #         break

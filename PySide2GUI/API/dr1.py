@@ -82,10 +82,10 @@ def battery_ping(debug=False):
 	_f = str(inspect.stack()[0][3])
 	while True:
 		time.sleep(5)
-			if debug:
-				print(f"{_f}: sent ping")
-			if command(b'battery?', debug=debug) is not None:
-				break
+		if debug:
+			print(f"{_f}: sent ping")
+		if command(b'battery?', debug=debug) is not None:
+			break
 
 
 def movements(t_mov, dst):

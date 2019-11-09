@@ -88,19 +88,21 @@ def battery_ping(debug=False):
         if command(b'battery?', debug=debug) is not None:
             break
 
+def movements(x, y, z, speed):
+    return f'go {x} {y} {z} {speed}'
 
-def movements(t_mov, dist):
-    """
-    Surprise motherf*cker...
-    """
-    return {
-        'up': f'up {dist}',
-        'down': f'down {dist}',
-        'left': f'left {dist}',
-        'right': f'right {dist}',
-        'forward': f'forward {dist}',
-        'back': f'back {dist}',
-    }.get(t_mov, 'Incorrect command')
+# def movements(t_mov, dist):
+#     """
+#     Surprise motherf*cker...
+#     """
+#     return {
+#         'up': f'go 0 0 {dist} 20',
+#         'down': f'go 0 0 {-dist} 20',
+#         'left': f'go 0 {dist} 0 20',
+#         'right': f'go 0 {-dist} 0 20',
+#         'forward': f'go {dist} 0 0 20',
+#         'back': f'go {-dist} 0 0 20',
+#     }.get(t_mov, 'Incorrect command')
 
 
 def angles(t_mov, degr):
@@ -150,8 +152,11 @@ if __name__ == "__main__":
                 cmd, num = msg.split()
                 if cmd in ['cw', 'ccw']:
                     command(bytes(angles(cmd, num), 'utf-8'))
-                else:
-                    command(bytes(movements(cmd, num), 'utf-8'))
+
+            elif len(msg.split()) == 5:
+                cmd, x, y, z, speed = msg.split()
+                command(bytes(movements(x,y,z,speed), 'utf-8'))
+
 
         except KeyboardInterrupt:
             print('closing connections...')
