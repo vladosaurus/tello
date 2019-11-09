@@ -42,7 +42,7 @@ class PlotWindow(FigureCanvas):  # Class for 3D window
         self.axes.set_ylabel('Y axis')
         self.axes.set_zlabel('Z axis')
 
-    def draw_plot(self, x, y, z):  # Fun for Graph plotting
+    def draw_plot(self, x: int, y: int, z: int):  # Fun for Graph plotting
         self.axes.clear()
         self.axes.plot(x, y, z, marker='x')
         # self.axes.plot_surface(x, y, z) #plots the 3D surface plot
@@ -68,6 +68,11 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
         self.drone.receive_go(x, y, z)
         coords = self.drone.get_trajectory()
         self.plot.draw_plot(*coords)  # call Fun for Graph plot
+
+    def reset(self):
+        self.drone = Drone()
+        coords = self.drone.get_trajectory()
+        self.plot.draw_plot(*coords) 
 
     #     # TODO: Draw arrows, direction
 
