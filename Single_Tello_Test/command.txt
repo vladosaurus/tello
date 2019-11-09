@@ -1,14 +1,14 @@
 command
 takeoff
-forward 100
-up 30
+forward 50 0 0 30
+up 0 0 30 30
 cw 90
-forward 100
-down 30
+forward 50 0 0 30
+down 0 0 -30 30
 cw 90
-forward 100
-down 30
+forward 50 0 0 30
+down 0 0 -30 30
 cw 90
-forward 100
-up 30
+forward 50 0 0 30
+up 0 0 30 30
 land

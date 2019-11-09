@@ -5,7 +5,7 @@ from stats import Stats
 
 
 class Tello:
-    def __init__(self, local_ip='', local_port=8889, tello_ip='192.168.10.1', tello_port=8889, max_timeout=15.0):
+    def __init__(self, local_ip='', local_port=8889, tello_ip='192.168.10.1', tello_port=8889, max_timeout=2.0):
         self.local_ip = local_ip
         self.local_port = local_port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # socket for sending cmd
@@ -35,7 +35,7 @@ class Tello:
         """
         self.log.append(Stats(command, len(self.log)))
 
-        self.socket.sendto(command.encode('utf-8'), self.tello_address)
+        #self.socket.sendto(command.encode('utf-8'), self.tello_address)
         print(f'sending command: {command} to {self.tello_ip}')
 
         start = time.time()
