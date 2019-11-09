@@ -88,6 +88,42 @@ def battery_ping(debug=False):
         if command(b'battery?', debug=debug) is not None:
             break
 
+def movements(x, y, z, speed):
+    return f'go {x} {y} {z} {speed}'
+
+# def movements(t_mov, dist):
+#     """
+#     Surprise motherf*cker...
+#     """
+#     return {
+#         'up': f'go 0 0 {dist} 20',
+#         'down': f'go 0 0 {-dist} 20',
+#         'left': f'go 0 {dist} 0 20',
+#         'right': f'go 0 {-dist} 0 20',
+#         'forward': f'go {dist} 0 0 20',
+#         'back': f'go {-dist} 0 0 20',
+#     }.get(t_mov, 'Incorrect command')
+
+
+def angles(t_mov, degr):
+    """
+    If input is string('cw'/'ccw') use var degr
+    """
+    return {
+            'cw': f'cw {degr}',
+            'ccw': f'ccw {degr}'
+    }.get(t_mov, 'Incorrect command')
+
+
+def no_params(t_mov):
+    """
+    Input for this function is single param (command, takeoff, land)
+    """
+    return{
+            'command': f'command',
+            'takeoff': f'takeoff',
+            'land': f'land',
+    }.get(t_mov, 'Incorrect command')
 
 
 command_thread = threading.Thread(target=command_receiver)
@@ -104,23 +140,33 @@ if __name__ == "__main__":
     print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
     print("=============================================================================")
     print("welcome")
+    while True:
+        try:
+            msg = input("")
+            # if not msg:
+            #     continue
+            if len(msg.split()) == 1:
+                command(bytes(no_params(msg), 'utf-8'))
 
-    # while True:
-    #     try:
-    #         msg = input("")
-    #         if not msg:
-    #             continue
-    #         command(bytes(msg, 'utf-8'))
-    #
-    #     except KeyboardInterrupt:
-    #         print('closing connections...')
-    #         command_sock.close()
-    #         video_sock.close()
-    #
-    #         print('waiting for threads...')
-    #         keep_alive_thread.join()
-    #         command_thread.join()
-    #         video_thread.join()
-    #
-    #         print('goodbye')
-    #         break
+            elif len(msg.split()) == 2:
+                cmd, num = msg.split()
+                if cmd in ['cw', 'ccw']:
+                    command(bytes(angles(cmd, num), 'utf-8'))
+
+            elif len(msg.split()) == 5:
+                cmd, x, y, z, speed = msg.split()
+                command(bytes(movements(x,y,z,speed), 'utf-8'))
+
+
+        except KeyboardInterrupt:
+            print('closing connections...')
+            command_sock.close()
+            video_sock.close()
+
+            print('waiting for threads...')
+            keep_alive_thread.join()
+            command_thread.join()
+            video_thread.join()
+
+            print('goodbye')
+            break
