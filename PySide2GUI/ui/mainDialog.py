@@ -1,13 +1,22 @@
 from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
+# import PyPlot widget for our 3D plot
+from plot.plot import PlotWindow
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         # This is equivalent to super(self.__class__, self).__init__()
         super().__init__()
+
+        self.plot = PlotWindow()
+
         self.setupUi(self)
+
+        # Any changes to layout, etc. has to be done after UI setup
+        self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
 
     def on_turn_left(self):
         print("on_turn_left")
