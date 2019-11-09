@@ -96,13 +96,14 @@ def movements(x, y, z, speed):
 #     """
 #     Surprise motherf*cker...
 #     """
+#     spd = 30
 #     return {
-#         'up': f'go 0 0 {dist} 20',
-#         'down': f'go 0 0 {-dist} 20',
-#         'left': f'go 0 {dist} 0 20',
-#         'right': f'go 0 {-dist} 0 20',
-#         'forward': f'go {dist} 0 0 20',
-#         'back': f'go {-dist} 0 0 20',
+#         'up': f'go 0 0 {dist} {spd}',
+#         'down': f'go 0 0 {-dist} {spd}',
+#         'left': f'go 0 {dist} 0 {spd}',
+#         'right': f'go 0 {-dist} 0 {spd}',
+#         'forward': f'go {dist} 0 0 {spd}',
+#         'back': f'go {-dist} 0 0 {spd}',
 #     }.get(t_mov, 'Incorrect command')
 
 
@@ -159,8 +160,8 @@ if __name__ == "__main__":
                 else:
                     tello.send_command(command(bytes(movements(cmd, num), 'utf-8')))
 
-            elif len(msg.split()) == 5:
-                cmd, x, y, z, speed = msg.split()
+            elif len(clean_cmd.split()) == 5:
+                cmd, x, y, z, speed = clean_cmd.split()
                 command(bytes(movements(x,y,z,speed), 'utf-8'))
 
 
