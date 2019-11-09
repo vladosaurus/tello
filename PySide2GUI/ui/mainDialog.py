@@ -3,6 +3,9 @@ from PySide2 import QtCore, QtGui, QtWidgets
 
 from Single_Tello_Test.dr2 import movements as go
 
+# import PyPlot widget for our 3D plot
+from plot.plot import PlotWidget
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -34,6 +37,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # EVENT HANDLERS
     # ------------------------
 
+        # Any changes to layout, etc. has to be done after UI setup
+        self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
+
     def on_turn_left(self):
         print("on_turn_left")
 
@@ -56,6 +62,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.teCommands.appendPlainText(go(30, 30, 30, 30))
 
     def on_up(self):
+        self.plot.fly_up()
         self.teCommands.appendPlainText("up")
 
     def on_add_command(self):
@@ -76,3 +83,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_pitch_reset(self):
         print("on_pitch_reset")
+
+    def on_simulation(self):
+        print("Simulatiooooon")
+
+    def on_push_to_drone(self):
+        print("pushing to drone... nothing")

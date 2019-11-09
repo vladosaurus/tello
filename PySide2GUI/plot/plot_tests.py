@@ -12,8 +12,8 @@ class TestGraph(TestCase):
         numpy.testing.assert_array_equal(
             drone.get_current_coord(), expected_result)
 
-    @mock.patch('plot.Plot.update_graph')
-    def test_receive_up_twice(self, mocked_plot):
+    #@mock.patch('plot.Plot.')
+    def test_receive_up_twice(self):
         drone = plot.Drone()
 
         drone.receive_movement('up', 10)
