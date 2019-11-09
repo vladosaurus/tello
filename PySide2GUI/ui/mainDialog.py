@@ -5,7 +5,8 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def __init__(self):
-        super(self.__class__, self).__init__()
+        # This is equivalent to super(self.__class__, self).__init__()
+        super().__init__()
         self.setupUi(self)
 
     def on_turn_left(self):
@@ -43,5 +44,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_takeoff_land(self):
         print("on_takeoff_land")
+
+    def on_pitch_up(self):
+        print("on_pitch_up")
+
+    def on_pitch_down(self):
+        print("on_pitch_down")
+
+    def on_pitch_reset(self):
+        print("on_pitch_reset")
 
 
