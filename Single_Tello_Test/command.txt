@@ -1,4 +1,10 @@
 command
 takeoff
-delay 5
+forward 100
+cw 90
+forward 100
+cw 90
+forward 100
+cw 90
+forward 100
 land
