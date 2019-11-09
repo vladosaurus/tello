@@ -7,7 +7,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         # This is equivalent to super(self.__class__, self).__init__()
         super().__init__()
+
+        # Commands
+        self.commands = set([
+            "go", "back", "forward", "cw", "ccw", "takeoff", "land"
+        ])
+
         self.setupUi(self)
+    
+    # ------------------------
+    # PROPERTIES
+    # ------------------------
+
+    @property
+    def command_text(self):
+        return self.lineEdit.text()
+
+    # ------------------------
+    # METHODS
+    # ------------------------
+    
+    def append_command(self, command):
+        self.teCommands.appendPlainText(command)
+
+    # ------------------------
+    # EVENT HANDLERS
+    # ------------------------
 
     def on_turn_left(self):
         print("on_turn_left")
@@ -34,11 +59,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.teCommands.appendPlainText("up")
 
     def on_add_command(self):
-        command = self.lineEdit.text()
-        commands = ["flip"]
-        if command in commands:
-            self.teCommands.appendPlainText(command)
-            return True
+        command = self.command_text.split(" ")[0]
+        if command in self.commands:
+            self.append_command(self.command_text)
+            return
         raise ValueError('Non-existing command!')
 
 
