@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 14:20:18 2019
+# Created: Sat Nov  9 15:31:29 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -135,6 +135,9 @@ class Ui_MainWindow(object):
         self.teCommands.setSizePolicy(sizePolicy)
         self.teCommands.setObjectName("teCommands")
         self.gRoot.addWidget(self.teCommands, 2, 1, 1, 1)
+        self.wMatPlotLib = QtWidgets.QWidget(self.gridLayoutWidget)
+        self.wMatPlotLib.setObjectName("wMatPlotLib")
+        self.gRoot.addWidget(self.wMatPlotLib, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.sbStatusBar = QtWidgets.QStatusBar(MainWindow)
         self.sbStatusBar.setObjectName("sbStatusBar")
@@ -142,6 +145,15 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.bTurnLeft_2, QtCore.SIGNAL("pressed()"), MainWindow.on_turn_left)
+        QtCore.QObject.connect(self.bForward_2, QtCore.SIGNAL("pressed()"), MainWindow.on_forward)
+        QtCore.QObject.connect(self.bTurnRight_2, QtCore.SIGNAL("pressed()"), MainWindow.on_turn_right)
+        QtCore.QObject.connect(self.bShtrafeLeft_2, QtCore.SIGNAL("pressed()"), MainWindow.on_strafe_left)
+        QtCore.QObject.connect(self.bTakeOffLand_2, QtCore.SIGNAL("pressed()"), MainWindow.on_takeoff_land)
+        QtCore.QObject.connect(self.bStrafeRight_2, QtCore.SIGNAL("pressed()"), MainWindow.on_strafe_right)
+        QtCore.QObject.connect(self.bDown_2, QtCore.SIGNAL("pressed()"), MainWindow.on_down)
+        QtCore.QObject.connect(self.bBack_2, QtCore.SIGNAL("pressed()"), MainWindow.on_back)
+        QtCore.QObject.connect(self.bUp_2, QtCore.SIGNAL("pressed()"), MainWindow.on_up)
+        QtCore.QObject.connect(self.bAddCommand, QtCore.SIGNAL("clicked()"), MainWindow.on_add_command)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -157,3 +169,4 @@ class Ui_MainWindow(object):
         self.bBack_2.setText(QtWidgets.QApplication.translate("MainWindow", "Back", None, -1))
         self.bDown_2.setText(QtWidgets.QApplication.translate("MainWindow", "Down", None, -1))
         self.bAddCommand.setText(QtWidgets.QApplication.translate("MainWindow", "Add Command", None, -1))
+

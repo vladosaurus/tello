@@ -218,6 +218,9 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QWidget" name="wMatPlotLib" native="true"/>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -238,6 +241,150 @@
     <hint type="destinationlabel">
      <x>84</x>
      <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bForward_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_forward()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bTurnRight_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_turn_right()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>322</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bShtrafeLeft_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_strafe_left()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>78</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bTakeOffLand_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_takeoff_land()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bStrafeRight_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_strafe_right()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>316</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bDown_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_down()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>383</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>419</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bBack_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>388</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bUp_2</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_up()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>317</x>
+     <y>387</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bAddCommand</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_add_command()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>601</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>634</y>
     </hint>
    </hints>
   </connection>
