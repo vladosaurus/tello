@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 21:32:29 2019
+# Created: Sat Nov  9 22:56:34 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -208,12 +208,12 @@ class Ui_MainWindow(object):
         self.teCommands.setFont(font)
         self.teCommands.setObjectName("teCommands")
         self.gRoot.addWidget(self.teCommands, 3, 1, 1, 1)
-        self.bSimulation = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.bResetSimulation = QtWidgets.QPushButton(self.gridLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.bSimulation.setFont(font)
-        self.bSimulation.setObjectName("bSimulation")
-        self.gRoot.addWidget(self.bSimulation, 4, 0, 1, 1)
+        self.bResetSimulation.setFont(font)
+        self.bResetSimulation.setObjectName("bResetSimulation")
+        self.gRoot.addWidget(self.bResetSimulation, 4, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.sbStatusBar = QtWidgets.QStatusBar(MainWindow)
         self.sbStatusBar.setObjectName("sbStatusBar")
@@ -230,7 +230,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.bBack_2, QtCore.SIGNAL("clicked()"), MainWindow.on_back)
         QtCore.QObject.connect(self.bUp_2, QtCore.SIGNAL("clicked()"), MainWindow.on_up)
         QtCore.QObject.connect(self.bAddCommand, QtCore.SIGNAL("clicked()"), MainWindow.on_add_command)
-        QtCore.QObject.connect(self.bSimulation, QtCore.SIGNAL("clicked()"), MainWindow.on_simulation)
+        QtCore.QObject.connect(self.bResetSimulation, QtCore.SIGNAL("clicked()"), MainWindow.on_reset_simulation)
         QtCore.QObject.connect(self.bPushToDrone, QtCore.SIGNAL("clicked()"), MainWindow.on_push_to_drone)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -259,5 +259,5 @@ class Ui_MainWindow(object):
         self.bAddCommand.setText(QtWidgets.QApplication.translate("MainWindow", "Add Command", None, -1))
         self.bAddCommand.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Return", None, -1))
         self.bPushToDrone.setText(QtWidgets.QApplication.translate("MainWindow", "Push to Drone", None, -1))
-        self.bSimulation.setText(QtWidgets.QApplication.translate("MainWindow", "Simulation", None, -1))
+        self.bResetSimulation.setText(QtWidgets.QApplication.translate("MainWindow", "Reset simulation", None, -1))
 

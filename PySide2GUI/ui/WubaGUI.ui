@@ -384,14 +384,14 @@
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QPushButton" name="bSimulation">
+      <widget class="QPushButton" name="bResetSimulation">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Simulation</string>
+        <string>Reset simulation</string>
        </property>
       </widget>
      </item>
@@ -563,10 +563,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>bSimulation</sender>
+   <sender>bResetSimulation</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_simulation()</slot>
+   <slot>on_reset_simulation()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>379</x>
@@ -607,6 +607,6 @@
   <slot>on_up()</slot>
   <slot>on_add_command()</slot>
   <slot>on_push_to_drone()</slot>
-  <slot>on_simulation()</slot>
+  <slot>on_reset_simulation()</slot>
  </slots>
 </ui>

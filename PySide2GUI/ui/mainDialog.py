@@ -116,8 +116,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def on_pitch_reset(self):
         print("on_pitch_reset")
 
-    def on_simulation(self):
-        print("Simulatiooooon")
+    def on_reset_simulation(self):
+        self.plot.reset()
 
     def on_push_to_drone(self):
         commands = ["command"] + self.teCommands.toPlainText().split("\n")
