@@ -1,3 +1,5 @@
+sc_pylibs
+PySide2
 numpy
 pillow
 opencv-contrib-python

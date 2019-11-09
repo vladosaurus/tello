@@ -2,12 +2,17 @@ from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
 from Single_Tello_Test.dr2 import movements as go
+from Single_Tello_Test.dr2 import angles as degrees
 
 # import PyPlot widget for our 3D plot
-from plot.plot import PlotWidget
+# from ..plot.plot import PlotWidget
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    HORIZONTAL_MOVE = 30
+    VERTICAL_MOVE = 30
+    ROTATION_MOVE = 30
+
 
     def __init__(self):
         # This is equivalent to super(self.__class__, self).__init__()
@@ -19,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         # Any changes to layout, etc. has to be done after UI setup
-        self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
+        # self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
     
     # ------------------------
     # PROPERTIES
@@ -28,6 +33,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @property
     def command_text(self):
         return self.lineEdit.text()
+
+    @property
+    def flying(self):
+        return True
+
+    @flying.setter
+    def flying(self, flying):
+        self.flying = flying
 
     # ------------------------
     # METHODS
@@ -41,29 +54,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # ------------------------
 
     def on_turn_left(self):
-        print("on_turn_left")
+        self.teCommands.appendPlainText(degrees("ccw", self.ROTATION_MOVE))
 
     def on_turn_right(self):
-        print("on_turn_right")
+        self.teCommands.appendPlainText(degrees("cw", self.ROTATION_MOVE))
 
     def on_forward(self):
-        print("on_forward")
+        self.teCommands.appendPlainText(go(self.HORIZONTAL_MOVE, 0, 0, self.leSpeed.text()))
 
     def on_back(self):
-        print("on_back")
+        self.teCommands.appendPlainText(go(-self.HORIZONTAL_MOVE, 0, 0, self.leSpeed.text()))
 
     def on_strafe_left(self):
-        print("on_strafe_left")
+        self.teCommands.appendPlainText(go(0, -self.HORIZONTAL_MOVE, 0, self.leSpeed.text()))
 
     def on_strafe_right(self):
-        print("on_strafe_right")
+        self.teCommands.appendPlainText(go(0, self.HORIZONTAL_MOVE, 0, self.leSpeed.text()))
 
     def on_down(self):
-        self.teCommands.appendPlainText(go(30, 30, 30, 30))
+        self.teCommands.appendPlainText(go(0, 0, -self.VERTICAL_MOVE, self.leSpeed.text()))
 
     def on_up(self):
-        self.plot.fly_up()
-        self.teCommands.appendPlainText("up")
+        # self.plot.fly_up()
+        self.teCommands.appendPlainText(go(0, 0, self.VERTICAL_MOVE, self.leSpeed.text()))
 
     def on_add_command(self):
         command = self.command_text.split(" ")[0]
