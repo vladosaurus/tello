@@ -30,16 +30,6 @@
      <property name="bottomMargin">
       <number>21</number>
      </property>
-     <item row="1" column="1">
-      <widget class="QOpenGLWidget" name="OpenGL">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <layout class="QGridLayout" name="gButtons">
        <item row="0" column="0">
