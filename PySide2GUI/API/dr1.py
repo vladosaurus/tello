@@ -79,18 +79,16 @@ def video_receiver():
 
 # While in command mode, the drone safely lands on its own after not receiving any commands for 15 seconds - this ping prevents that from happenning
 def battery_ping(debug=False):
-<<<<<<< HEAD
 	_f = str(inspect.stack()[0][3])
 	while True:
 		time.sleep(5)
-			if debug:
-				print(f"{_f}: sent ping")
-			if command(b'battery?', debug=debug) is not None:
-				break
+        if debug:
+            print(f"{_f}: sent ping")
+        if command(b'battery?', debug=debug) is not None:
+            break
 
 
-=======
-    _f = str(inspect.stack()[0][3])
+    f = str(inspect.stack()[0][3])
     while True:
         time.sleep(5)
         if debug:
@@ -99,7 +97,6 @@ def battery_ping(debug=False):
             break
 
 # VAR. I
->>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
 def movements(t_mov, dst):
 	"""
 	Surprise motherf*cker...
@@ -114,7 +111,6 @@ def movements(t_mov, dst):
 		'takeoff': f'takeoff',
 		'land': f'land'
 	}.get(t_mov, 'Incorrect command')
-<<<<<<< HEAD
 
 
 def angles(type_n, degr):
@@ -136,13 +132,8 @@ def no_params(cmd):
 			'takeoff': f'takeoff',
 			'land': f'land',
 	}.get(cmd, 'Incorrect command')
-=======
->>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
 
 def angles(type_n, degr):
-    """
-    Surprise motherf*cker...
-    """
     return {
         'cw': f'cw {degr}',
         'ccw': f'ccw {degr}'
@@ -166,7 +157,6 @@ keep_alive_thread = threading.Thread(target=battery_ping)
 keep_alive_thread.start()
 
 if __name__ == "__main__":
-<<<<<<< HEAD
 	print("=============================================================================")
 	print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
 	print("=============================================================================")
@@ -191,7 +181,6 @@ if __name__ == "__main__":
 				print('closing connections...')
 				command_sock.close()
 				video_sock.close()
-=======
    print("=============================================================================")
    print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
    print("=============================================================================")
@@ -233,5 +222,3 @@ except KeyboardInterrupt:
     print('closing connections...')
     command_sock.close()
     video_sock.close()
-
->>>>>>> 12ee1ee0533e6d9a28b2edb509f45f7303f734cd
