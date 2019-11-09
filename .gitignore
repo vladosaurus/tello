@@ -3,3 +3,4 @@
 *.dat
 *.caffemodel
 .idea/*
+/venv/
