@@ -120,5 +120,5 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.plot.reset()
 
     def on_push_to_drone(self):
-        commands = ["command"] + self.teCommands.toPlainText().split("\n")
+        commands = ["command", "takeoff"] + self.teCommands.toPlainText().split("\n") + ["land"]
         self.api.run_commands(commands)
