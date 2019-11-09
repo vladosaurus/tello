@@ -17,6 +17,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.commands = {"go", "back", "forward", "cw", "ccw", "takeoff", "land"}
 
         self.setupUi(self)
+
+        # Any changes to layout, etc. has to be done after UI setup
+        self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
     
     # ------------------------
     # PROPERTIES
@@ -36,9 +39,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # ------------------------
     # EVENT HANDLERS
     # ------------------------
-
-        # Any changes to layout, etc. has to be done after UI setup
-        self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
 
     def on_turn_left(self):
         print("on_turn_left")
