@@ -70,7 +70,7 @@
           </font>
          </property>
          <property name="text">
-          <string>TakeOff / Land</string>
+          <string>Take Off</string>
          </property>
          <property name="shortcut">
           <string>5</string>
@@ -83,6 +83,18 @@
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Speed</string>
          </property>
         </widget>
        </item>
@@ -167,30 +179,6 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="bPitchUp">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Pitch Up</string>
-         </property>
-         <property name="autoRepeat">
-          <bool>true</bool>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="2">
         <widget class="QPushButton" name="bStrafeRight_2">
          <property name="sizePolicy">
@@ -245,51 +233,25 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QPushButton" name="bPitchDown">
+       <item row="3" column="1" colspan="2">
+        <widget class="QLineEdit" name="leSpeed">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="font">
           <font>
+           <family>Courier New</family>
            <pointsize>12</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Pitch Down</string>
+          <string>60</string>
          </property>
-         <property name="autoRepeat">
-          <bool>true</bool>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QPushButton" name="bPitchReset">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Pitch Reset</string>
-         </property>
-         <property name="autoRepeat">
-          <bool>true</bool>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -347,40 +309,6 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1" colspan="2">
-        <widget class="QLineEdit" name="leSpeed">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Courier New</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>60</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Speed</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
      <item row="3" column="0">
@@ -429,6 +357,11 @@
      </item>
      <item row="4" column="1">
       <widget class="QPushButton" name="bPushToDrone">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Push to Drone</string>
        </property>
@@ -452,6 +385,11 @@
      </item>
      <item row="4" column="0">
       <widget class="QPushButton" name="bSimulation">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Simulation</string>
        </property>
@@ -471,8 +409,8 @@
    <slot>on_turn_left()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>95</x>
-     <y>64</y>
+     <x>98</x>
+     <y>80</y>
     </hint>
     <hint type="destinationlabel">
      <x>84</x>
@@ -487,8 +425,8 @@
    <slot>on_forward()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>67</y>
+     <x>242</x>
+     <y>83</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -503,8 +441,8 @@
    <slot>on_turn_right()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>424</x>
-     <y>67</y>
+     <x>412</x>
+     <y>83</y>
     </hint>
     <hint type="destinationlabel">
      <x>324</x>
@@ -519,8 +457,8 @@
    <slot>on_strafe_left()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>98</x>
-     <y>154</y>
+     <x>101</x>
+     <y>186</y>
     </hint>
     <hint type="destinationlabel">
      <x>78</x>
@@ -535,8 +473,8 @@
    <slot>on_takeoff_land()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>245</x>
-     <y>150</y>
+     <x>251</x>
+     <y>182</y>
     </hint>
     <hint type="destinationlabel">
      <x>197</x>
@@ -551,8 +489,8 @@
    <slot>on_strafe_right()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>418</x>
-     <y>156</y>
+     <x>406</x>
+     <y>188</y>
     </hint>
     <hint type="destinationlabel">
      <x>316</x>
@@ -567,8 +505,8 @@
    <slot>on_down()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>94</x>
-     <y>235</y>
+     <x>97</x>
+     <y>283</y>
     </hint>
     <hint type="destinationlabel">
      <x>74</x>
@@ -583,8 +521,8 @@
    <slot>on_back()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>246</x>
-     <y>240</y>
+     <x>252</x>
+     <y>288</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -599,8 +537,8 @@
    <slot>on_up()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>419</x>
-     <y>239</y>
+     <x>407</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
      <x>320</x>
@@ -621,54 +559,6 @@
     <hint type="destinationlabel">
      <x>297</x>
      <y>634</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>bPitchUp</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_pitch_up()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>127</x>
-     <y>325</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>106</x>
-     <y>455</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>bPitchReset</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_pitch_reset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>277</x>
-     <y>323</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>236</x>
-     <y>456</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>bPitchDown</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_pitch_down()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>323</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>358</x>
-     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -716,9 +606,6 @@
   <slot>on_back()</slot>
   <slot>on_up()</slot>
   <slot>on_add_command()</slot>
-  <slot>on_pitch_up()</slot>
-  <slot>on_pitch_down()</slot>
-  <slot>on_pitch_reset()</slot>
   <slot>on_push_to_drone()</slot>
   <slot>on_simulation()</slot>
  </slots>
