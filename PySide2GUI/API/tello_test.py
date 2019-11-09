@@ -1,4 +1,4 @@
-from tello import Tello
+from .tello import Tello
 import sys
 from datetime import datetime
 import time
@@ -27,7 +27,7 @@ def no_params(t_mov):
             'land': f'land',
     }.get(t_mov, 'Incorrect command')
 
-file_name = sys.argv[1]
+#file_name = sys.argv[1]
 
 tello = Tello()
 with open('command.txt', 'r') as txt:

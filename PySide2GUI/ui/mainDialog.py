@@ -1,8 +1,8 @@
 from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
-from ...Single_Tello_Test.dr2 import movements as go
-from ...Single_Tello_Test.dr2 import angles as degrees
+from API.tello_test import movements as go
+from API.tello_test import angles as degrees
 
 # import PyPlot widget for our 3D plot
 from ..plot.plot import PlotWidget
