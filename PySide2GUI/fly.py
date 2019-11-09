@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets
+from PySide2 import QtWidgets
 from ui.mainDialog import MainWindow
 
 
