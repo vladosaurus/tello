@@ -1,6 +1,8 @@
 from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
+from Single_Tello_Test.dr2 import movements as go
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -9,9 +11,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super().__init__()
 
         # Commands
-        self.commands = set([
-            "go", "back", "forward", "cw", "ccw", "takeoff", "land"
-        ])
+        self.commands = {"go", "back", "forward", "cw", "ccw", "takeoff", "land"}
 
         self.setupUi(self)
     
@@ -53,7 +53,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print("on_strafe_right")
 
     def on_down(self):
-        print("on_down")
+        self.teCommands.appendPlainText(go(30, 30, 30, 30))
 
     def on_up(self):
         self.teCommands.appendPlainText("up")
@@ -64,7 +64,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.append_command(self.command_text)
             return
         raise ValueError('Non-existing command!')
-
 
     def on_takeoff_land(self):
         print("on_takeoff_land")
@@ -77,5 +76,3 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_pitch_reset(self):
         print("on_pitch_reset")
-
-
