@@ -82,21 +82,12 @@ def battery_ping(debug=False):
 	_f = str(inspect.stack()[0][3])
 	while True:
 		time.sleep(5)
-        if debug:
-            print(f"{_f}: sent ping")
-        if command(b'battery?', debug=debug) is not None:
-            break
+			if debug:
+				print(f"{_f}: sent ping")
+			if command(b'battery?', debug=debug) is not None:
+				break
 
 
-    f = str(inspect.stack()[0][3])
-    while True:
-        time.sleep(5)
-        if debug:
-            print(f"{_f}: sent ping")
-        if command(b'battery?', debug=debug) is not None:
-            break
-
-# VAR. I
 def movements(t_mov, dst):
 	"""
 	Surprise motherf*cker...
@@ -133,19 +124,6 @@ def no_params(cmd):
 			'land': f'land',
 	}.get(cmd, 'Incorrect command')
 
-def angles(type_n, degr):
-    return {
-        'cw': f'cw {degr}',
-        'ccw': f'ccw {degr}'
-    }.get(type_n, 'Incorrect command')
-
-def no_params(cmd):
-    return{
-        'command': f'command',
-        'takeoff': f'takeoff',
-        'land': f'land',
-
-    }.get(cmd, 'Incorrect command')
 
 command_thread = threading.Thread(target=command_receiver)
 command_thread.start()
@@ -181,44 +159,3 @@ if __name__ == "__main__":
 				print('closing connections...')
 				command_sock.close()
 				video_sock.close()
-   print("=============================================================================")
-   print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
-   print("=============================================================================")
-   print("welcome")
-   # while True:
-   #     try:
-   #         msg = input("")
-   #         if not msg:
-   #             continue
-   #         # command(bytes(msg, 'utf-8'))
-   #         command(bytes(movements(type_m, dist1), 'utf-8'))
-   #     except KeyboardInterrupt:
-   #         print('closing connections...')
-   #         command_sock.close()
-   #         video_sock.close()
-   #         print('waiting for threads...')
-   #         keep_alive_thread.join()
-   #         command_thread.join()
-   #         video_thread.join()
-   #         print('goodbye')
-   #         break
-
-f = open("../../Single_Tello_Test/command.txt", "r")
-commands = f.readlines()
-
-try:
-    for task in commands:
-        if len(task.split()) == 1:
-            command(bytes(no_params(task.strip()), 'utf-8'))
-        elif len(task.split()) == 2:
-            tmv, prop = task.split()
-            if tmv == "cw" or "ccw":
-                command(bytes(angles(tmv, prop), 'utf-8'))
-            command(bytes(movements(tmv, prop), 'utf-8'))
-        else:
-            continue
-
-except KeyboardInterrupt:
-    print('closing connections...')
-    command_sock.close()
-    video_sock.close()
