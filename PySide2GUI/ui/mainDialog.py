@@ -2,7 +2,7 @@ from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
 # import PyPlot widget for our 3D plot
-from plot.plot import PlotWindow
+from plot.plot import PlotWidget
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -11,9 +11,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # This is equivalent to super(self.__class__, self).__init__()
         super().__init__()
 
-        self.plot = PlotWindow()
+        # Commands
+        self.commands = set([
+            "go", "back", "forward", "cw", "ccw", "takeoff", "land"
+        ])
+        self.plot = PlotWidget()
 
         self.setupUi(self)
+    
+    # ------------------------
+    # PROPERTIES
+    # ------------------------
+
+    @property
+    def command_text(self):
+        return self.lineEdit.text()
+
+    # ------------------------
+    # METHODS
+    # ------------------------
+    
+    def append_command(self, command):
+        self.teCommands.appendPlainText(command)
+
+    # ------------------------
+    # EVENT HANDLERS
+    # ------------------------
 
         # Any changes to layout, etc. has to be done after UI setup
         self.gRoot.addWidget(self.plot, 1, 1, 1, 1)
@@ -40,16 +63,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print("on_down")
 
     def on_up(self):
+        self.plot.fly_up()
         self.teCommands.appendPlainText("up")
 
     def on_add_command(self):
-        command = self.lineEdit.text()
-        commands = ["flip"]
-        if command in commands:
-            self.teCommands.appendPlainText(command)
-            return True
+        command = self.command_text.split(" ")[0]
+        if command in self.commands:
+            self.append_command(self.command_text)
+            return
         raise ValueError('Non-existing command!')
-
 
     def on_takeoff_land(self):
         print("on_takeoff_land")
@@ -62,5 +84,3 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_pitch_reset(self):
         print("on_pitch_reset")
-
-
