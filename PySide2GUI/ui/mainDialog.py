@@ -101,10 +101,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self._flying = not self._flying
 
         if self._flying:
-            self.bTakeOffLand_2.text("Land")
+            self.bTakeOffLand_2.setText("Land")
             self.append_command("takeoff")
         else:
-            self.bTakeOffLand_2.text("Take Off")
+            self.bTakeOffLand_2.setText("Take Off")
             self.append_command("land")
 
     def on_pitch_up(self):
@@ -120,4 +120,5 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print("Simulatiooooon")
 
     def on_push_to_drone(self):
-        print("pushing to drone... nothing")
+        commands = ["command"] + self.teCommands.toPlainText().split("\n")
+        self.api.run_commands(commands)

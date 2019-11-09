@@ -15,21 +15,7 @@ class API:
             commands = txt.readlines()
             clean_cmds = [w.strip() for w in commands]
 
-            for clean_cmd in clean_cmds:
-                if len(clean_cmd.split()) == 1:
-                    # tello.send_command(command(bytes(no_params(clean_cmd), 'utf-8')))
-                    self.tello.send_command(self.no_params(clean_cmd))
-
-                elif len(clean_cmd.split()) == 2:
-                    cmd, num = clean_cmd.split()
-                    if cmd in ['cw', 'ccw']:
-                        # tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
-                        self.tello.send_command(self.command_rotation(cmd, num))
-
-                elif len(clean_cmd.split()) == 5:
-                    cmd, x, y, z, speed = clean_cmd.split()
-                    # tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
-                    self.tello.send_command(self.command_go(x, y, z, speed))
+            self.run_commands(clean_cmds)
 
         log = self.tello.get_log()
 
@@ -38,6 +24,25 @@ class API:
             stat.print_stats()
             str = stat.return_stats()
             out.write(str)
+    
+    def run_commands(self, commands):
+        for cmd in commands:
+            self.tello.send_command(cmd)
+
+            # if len(cmd.split()) == 1:
+            #     # tello.send_command(command(bytes(no_params(cmd), 'utf-8')))
+            #     self.tello.send_command(self.no_params(cmd))
+
+            # elif len(cmd.split()) == 2:
+            #     cmd, num = cmd.split()
+            #     if cmd in ['cw', 'ccw']:
+            #         # tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
+            #         self.tello.send_command(self.command_rotation(cmd, num))
+
+            # elif len(cmd.split()) == 5:
+            #     cmd, x, y, z, speed = cmd.split()
+            #     # tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
+            #     self.tello.send_command(self.command_go(x, y, z, speed))
 
     @staticmethod
     def command_go(x, y, z, speed):
