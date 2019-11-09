@@ -84,3 +84,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_pitch_reset(self):
         print("on_pitch_reset")
+    
+    def on_simulation(self):
+        print("Simulatiooooon")
+
+    def on_push_to_drone(self):
+        print("pushing to drone... nothing")
