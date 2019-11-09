@@ -17,20 +17,39 @@ class Drone:
         '''
         self.current_coordinates = numpy.array([0, 0, 0])
         self.trajectory = numpy.array([[0, 0, 0]])
+        # rotation in degrees
+        self.current_rotation = 0
 
     def get_current_coord(self) -> numpy.array:
         return self.current_coordinates
 
     def get_trajectory(self) -> numpy.array:
-        print(self.trajectory.T)
         return numpy.array(self.trajectory.T)
+
+    def get_current_rotation(self) -> int:
+        return self.current_rotation
 
     def receive_go(self, x: int, y: int, z: int):
         self.current_coordinates[0] += x
         self.current_coordinates[1] += y
         self.current_coordinates[2] += z
 
-        self.trajectory = numpy.vstack((self.trajectory, self.current_coordinates))
+        self.trajectory = numpy.vstack(
+            (self.trajectory, self.current_coordinates))
+
+    @staticmethod
+    def _normalize_rotation(deg: int):
+        angle = deg % 360
+
+        angle = (angle + 360) % 360
+
+        if (angle > 180):
+            angle -= 360
+
+        return angle
+
+    def receive_roration(self, deg: int):
+        self.current_rotation = self._normalize_rotation(deg)
 
 
 class PlotWindow(FigureCanvas):  # Class for 3D window
@@ -64,7 +83,6 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
 
         self.setLayout(MainLayout)  # sets Main layout
 
-
     def command_go(self, x=10, y=10, z=10):
         self.drone.receive_go(x, y, z)
         coords = self.drone.get_trajectory()
@@ -76,7 +94,7 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
     def reset(self):
         self.drone = Drone()
         coords = self.drone.get_trajectory()
-        self.plot.draw_plot(*coords) 
+        self.plot.draw_plot(*coords)
 
     #     # TODO: Draw arrows, direction
 

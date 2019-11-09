@@ -7,7 +7,7 @@ class TestGraph(TestCase):
     def test_zero_coord(self):
         drone = plot.Drone()
 
-        expected_result = numpy.array([[0, 0, 0]]).T
+        expected_result = numpy.array([0, 0, 0])
 
         numpy.testing.assert_array_equal(
             drone.get_current_coord(), expected_result)
@@ -18,15 +18,37 @@ class TestGraph(TestCase):
 
         drone.receive_go(0, 0, 10)
 
-        expected_result = numpy.array([[0, 0, 10]]).T
+        expected_result = numpy.array([0, 0, 10])
 
         numpy.testing.assert_array_equal(
             drone.get_current_coord(), expected_result)
 
         drone.receive_go(0, 0, 15)
 
-        expected_result = numpy.array([[0, 0, 25]]).T
+        expected_result = numpy.array([0, 0, 25])
 
         numpy.testing.assert_array_equal(
             drone.get_current_coord(), expected_result)
+
+    def test_receive_rotation_below_zero(self):
+        drone = plot.Drone()
+
+        drone.receive_roration(-30)
+
+        numpy.testing.assert_equal(drone.get_current_rotation(), -30)
+
+
+    def test_receive_rotation_above_180(self):
+        drone = plot.Drone()
+
+        drone.receive_roration(190)
+
+        numpy.testing.assert_equal(drone.get_current_rotation(), -170)
+
+    def test_receive_rotation_above_360(self):
+        drone = plot.Drone()
+
+        drone.receive_roration(370)
+
+        numpy.testing.assert_equal(drone.get_current_rotation(), 10)
 
