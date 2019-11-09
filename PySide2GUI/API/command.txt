@@ -1,0 +1,14 @@
+command
+takeoff
+go 50 0 0 30
+go 0 0 30 30
+cw 90
+go 50 0 0 30
+go 0 0 -30 30
+cw 90
+go 50 0 0 30
+go 0 0 -30 30
+cw 90
+go 50 0 0 30
+go 0 0 30 30
+land
