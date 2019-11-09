@@ -99,8 +99,6 @@ def movements(t_mov, dst):
 		'right': f'right {dst}',
 		'forward': f'forward {dst}',
 		'back': f'back {dst}',
-		'takeoff': f'takeoff',
-		'land': f'land'
 	}.get(t_mov, 'Incorrect command')
 
 
