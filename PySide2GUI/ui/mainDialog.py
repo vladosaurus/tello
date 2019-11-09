@@ -1,11 +1,10 @@
 from ui.WubaGUI import Ui_MainWindow
 from PySide2 import QtCore, QtGui, QtWidgets
 
-from API.tello_test import movements as go
-from API.tello_test import angles as degrees
+from API.api import API
 
 # import PyPlot widget for our 3D plot
-from ..plot.plot import PlotWidget
+from plot.plot import PlotWidget
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -16,6 +15,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         # This is equivalent to super(self.__class__, self).__init__()
         super().__init__()
+
+        # Intialize plot widget
+        self.plot = PlotWidget()
+
+        # Initialize API
+        self.api = API()
 
         # Commands
         self.commands = { "go", "back", "forward", "cw", "ccw", "takeoff", "land" }
@@ -48,42 +53,42 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def on_turn_left(self):
         # coord = (0, 0, self.VERTICAL_MOVE)
         # self.plot.command_go(*coord)
-        self.append_command(degrees("ccw", self.ROTATION_MOVE))
+        self.append_command(self.api.command_rotation("ccw", self.ROTATION_MOVE))
 
     def on_turn_right(self):
         # coord = (0, 0, self.VERTICAL_MOVE)
         # self.plot.command_go(*coord)
-        self.append_command(degrees("cw", self.ROTATION_MOVE))
+        self.append_command(self.api.command_rotation("cw", self.ROTATION_MOVE))
 
     def on_forward(self):
         coord = (self.HORIZONTAL_MOVE, 0, 0)
         self.plot.command_go(*coord)
-        self.append_command(go(*coord, self.leSpeed.text()))
+        self.append_command(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_back(self):
         coord = (-self.HORIZONTAL_MOVE, 0, 0)
         self.plot.command_go(*coord)
-        self.append_command(go(*coord, self.leSpeed.text()))
+        self.append_command(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_strafe_left(self):
         coord = (0, -self.HORIZONTAL_MOVE, 0)
         self.plot.command_go(*coord)
-        self.append_command(go(*coord, self.leSpeed.text()))
+        self.append_command(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_strafe_right(self):
         coord = (0, self.HORIZONTAL_MOVE, 0)
         self.plot.command_go(*coord)
-        self.teCommands.appendPlainText(go(*coord, self.leSpeed.text()))
+        self.teCommands.appendPlainText(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_down(self):
         coord = (0, 0, -self.VERTICAL_MOVE)
         self.plot.command_go(*coord)
-        self.append_command(go(*coord, self.leSpeed.text()))
+        self.append_command(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_up(self):
         coord = (0, 0, self.VERTICAL_MOVE)
         self.plot.command_go(*coord)
-        self.append_command(go(*coord, self.leSpeed.text()))
+        self.append_command(self.api.command_go(*coord, self.leSpeed.text()))
 
     def on_add_command(self):
         command = self.command_text.split(" ")[0]
