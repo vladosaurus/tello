@@ -22,7 +22,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1071</width>
+      <width>1081</width>
       <height>721</height>
      </rect>
     </property>
@@ -32,19 +32,24 @@
      </property>
      <item row="1" column="0">
       <layout class="QGridLayout" name="gButtons">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="bTurnLeft_2">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="bShtrafeLeft_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Turn Left</string>
+          <string>Strafe Left</string>
          </property>
          <property name="shortcut">
-          <string>7</string>
+          <string>4</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -58,6 +63,11 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>TakeOff / Land</string>
@@ -73,57 +83,24 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="bStrafeRight_2">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="bTurnLeft_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
-          <string>Strafe Right</string>
-         </property>
-         <property name="shortcut">
-          <string>6</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="bForward_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="text">
-          <string>Forward</string>
+          <string>Turn Left</string>
          </property>
          <property name="shortcut">
-          <string>8</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="bDown_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Down</string>
-         </property>
-         <property name="shortcut">
-          <string>1</string>
+          <string>7</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -138,6 +115,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Turn Right</string>
          </property>
@@ -149,38 +131,63 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="bShtrafeLeft_2">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="bDown_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Strafe Left</string>
+          <string>Down</string>
          </property>
          <property name="shortcut">
-          <string>4</string>
+          <string>1</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="bUp_2">
+       <item row="3" column="0">
+        <widget class="QPushButton" name="bPitchUp">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Pitch Up</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="bStrafeRight_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Up</string>
+          <string>Strafe Right</string>
          </property>
          <property name="shortcut">
-          <string>3</string>
+          <string>6</string>
          </property>
          <property name="autoRepeatDelay">
           <number>100</number>
@@ -195,6 +202,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Back</string>
          </property>
@@ -206,18 +218,13 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="bPitchUp">
-         <property name="text">
-          <string>Pitch Up</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="2">
         <widget class="QPushButton" name="bPitchDown">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Pitch Down</string>
          </property>
@@ -228,6 +235,11 @@
        </item>
        <item row="3" column="1">
         <widget class="QPushButton" name="bPitchReset">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Pitch Reset</string>
          </property>
@@ -236,7 +248,71 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="bForward_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Forward</string>
+         </property>
+         <property name="shortcut">
+          <string>8</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="bUp_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Up</string>
+         </property>
+         <property name="shortcut">
+          <string>3</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPlainTextEdit" name="teCommands">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Courier New</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <layout class="QHBoxLayout" name="hCommands">
@@ -247,6 +323,12 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -261,6 +343,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Add Command</string>
          </property>
@@ -270,16 +357,6 @@
         </widget>
        </item>
       </layout>
-     </item>
-     <item row="2" column="1">
-      <widget class="QPlainTextEdit" name="teCommands">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
      </item>
      <item row="1" column="1">
       <widget class="QWidget" name="wMatPlotLib" native="true"/>
