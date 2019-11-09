@@ -4,3 +4,4 @@
 *.caffemodel
 .idea/*
 /venv/
+/video*.tmp
