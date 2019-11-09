@@ -35,7 +35,7 @@ class Tello:
         """
         self.log.append(Stats(command, len(self.log)))
 
-        self.socket.sendto(command.encode('utf-8'), self.tello_address)
+        #self.socket.sendto(command.encode('utf-8'), self.tello_address)
         print(f'sending command: {command} to {self.tello_ip}')
 
         start = time.time()
