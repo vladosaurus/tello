@@ -29,21 +29,6 @@ class API:
         for cmd in commands:
             self.tello.send_command(cmd)
 
-            # if len(cmd.split()) == 1:
-            #     # tello.send_command(command(bytes(no_params(cmd), 'utf-8')))
-            #     self.tello.send_command(self.no_params(cmd))
-
-            # elif len(cmd.split()) == 2:
-            #     cmd, num = cmd.split()
-            #     if cmd in ['cw', 'ccw']:
-            #         # tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
-            #         self.tello.send_command(self.command_rotation(cmd, num))
-
-            # elif len(cmd.split()) == 5:
-            #     cmd, x, y, z, speed = cmd.split()
-            #     # tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
-            #     self.tello.send_command(self.command_go(x, y, z, speed))
-
     @staticmethod
     def command_go(x, y, z, speed):
        return f'go {x} {y} {z} {speed}'
