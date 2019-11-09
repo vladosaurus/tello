@@ -89,6 +89,7 @@ def battery_ping(debug=False):
         if command(b'battery?', debug=debug) is not None:
             break
 
+
 def movements(x, y, z, speed):
     return f'go {x} {y} {z} {speed}'
 
@@ -137,11 +138,13 @@ video_thread.start()
 keep_alive_thread = threading.Thread(target=battery_ping)
 keep_alive_thread.start()
 
+
 if __name__ == "__main__":
     print("=============================================================================")
     print("This tool has been hack(athon)ed together very quickly, use at your own risk.")
     print("=============================================================================")
     print("welcome")
+
     with open('command.txt', 'r') as txt:
         commands = txt.readlines()
         clean_cmds = [w.strip() for w in commands]
@@ -157,12 +160,10 @@ if __name__ == "__main__":
                 if cmd in ['cw', 'ccw']:
                     tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
 
-                else:
-                    tello.send_command(command(bytes(movements(cmd, num), 'utf-8')))
 
             elif len(clean_cmd.split()) == 5:
                 cmd, x, y, z, speed = clean_cmd.split()
-                command(bytes(movements(x,y,z,speed), 'utf-8'))
+                tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
 
 
         except KeyboardInterrupt:
