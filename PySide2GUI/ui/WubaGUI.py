@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 20:13:37 2019
+# Created: Sat Nov  9 20:23:25 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -202,18 +202,6 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.gButtons.addWidget(self.label, 4, 0, 1, 1)
         self.gRoot.addLayout(self.gButtons, 1, 0, 1, 1)
-        self.teCommands = QtWidgets.QPlainTextEdit(self.gridLayoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.teCommands.sizePolicy().hasHeightForWidth())
-        self.teCommands.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Courier New")
-        font.setPointSize(12)
-        self.teCommands.setFont(font)
-        self.teCommands.setObjectName("teCommands")
-        self.gRoot.addWidget(self.teCommands, 2, 1, 1, 1)
         self.hCommands = QtWidgets.QHBoxLayout()
         self.hCommands.setObjectName("hCommands")
         self.lineEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
@@ -240,7 +228,25 @@ class Ui_MainWindow(object):
         self.bAddCommand.setFont(font)
         self.bAddCommand.setObjectName("bAddCommand")
         self.hCommands.addWidget(self.bAddCommand)
-        self.gRoot.addLayout(self.hCommands, 2, 0, 1, 1)
+        self.gRoot.addLayout(self.hCommands, 3, 0, 1, 1)
+        self.bPushToDrone = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.bPushToDrone.setObjectName("bPushToDrone")
+        self.gRoot.addWidget(self.bPushToDrone, 4, 1, 1, 1)
+        self.teCommands = QtWidgets.QPlainTextEdit(self.gridLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.teCommands.sizePolicy().hasHeightForWidth())
+        self.teCommands.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(12)
+        self.teCommands.setFont(font)
+        self.teCommands.setObjectName("teCommands")
+        self.gRoot.addWidget(self.teCommands, 3, 1, 1, 1)
+        self.bSimulation = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.bSimulation.setObjectName("bSimulation")
+        self.gRoot.addWidget(self.bSimulation, 4, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.sbStatusBar = QtWidgets.QStatusBar(MainWindow)
         self.sbStatusBar.setObjectName("sbStatusBar")
@@ -260,6 +266,8 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.bPitchUp, QtCore.SIGNAL("clicked()"), MainWindow.on_pitch_up)
         QtCore.QObject.connect(self.bPitchReset, QtCore.SIGNAL("clicked()"), MainWindow.on_pitch_reset)
         QtCore.QObject.connect(self.bPitchDown, QtCore.SIGNAL("clicked()"), MainWindow.on_pitch_down)
+        QtCore.QObject.connect(self.bSimulation, QtCore.SIGNAL("clicked()"), MainWindow.on_simulation)
+        QtCore.QObject.connect(self.bPushToDrone, QtCore.SIGNAL("clicked()"), MainWindow.on_push_to_drone)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -289,4 +297,6 @@ class Ui_MainWindow(object):
         self.label.setText(QtWidgets.QApplication.translate("MainWindow", "Speed", None, -1))
         self.bAddCommand.setText(QtWidgets.QApplication.translate("MainWindow", "Add Command", None, -1))
         self.bAddCommand.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Return", None, -1))
+        self.bPushToDrone.setText(QtWidgets.QApplication.translate("MainWindow", "Push to Drone", None, -1))
+        self.bSimulation.setText(QtWidgets.QApplication.translate("MainWindow", "Simulation", None, -1))
 

@@ -383,23 +383,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="1">
-      <widget class="QPlainTextEdit" name="teCommands">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <family>Courier New</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <layout class="QHBoxLayout" name="hCommands">
        <item>
         <widget class="QLineEdit" name="lineEdit">
@@ -443,6 +427,36 @@
        </item>
       </layout>
      </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="bPushToDrone">
+       <property name="text">
+        <string>Push to Drone</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPlainTextEdit" name="teCommands">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Courier New</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="bSimulation">
+       <property name="text">
+        <string>Simulation</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -457,8 +471,8 @@
    <slot>on_turn_left()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>74</x>
-     <y>89</y>
+     <x>95</x>
+     <y>64</y>
     </hint>
     <hint type="destinationlabel">
      <x>84</x>
@@ -473,8 +487,8 @@
    <slot>on_forward()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>189</x>
-     <y>92</y>
+     <x>236</x>
+     <y>67</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -489,8 +503,8 @@
    <slot>on_turn_right()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>322</x>
-     <y>92</y>
+     <x>424</x>
+     <y>67</y>
     </hint>
     <hint type="destinationlabel">
      <x>324</x>
@@ -505,8 +519,8 @@
    <slot>on_strafe_left()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>200</y>
+     <x>98</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
      <x>78</x>
@@ -521,8 +535,8 @@
    <slot>on_takeoff_land()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>198</x>
-     <y>196</y>
+     <x>245</x>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>197</x>
@@ -537,8 +551,8 @@
    <slot>on_strafe_right()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>202</y>
+     <x>418</x>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
      <x>316</x>
@@ -553,8 +567,8 @@
    <slot>on_down()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>73</x>
-     <y>302</y>
+     <x>94</x>
+     <y>235</y>
     </hint>
     <hint type="destinationlabel">
      <x>74</x>
@@ -569,8 +583,8 @@
    <slot>on_back()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>199</x>
-     <y>307</y>
+     <x>246</x>
+     <y>240</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -585,8 +599,8 @@
    <slot>on_up()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>317</x>
-     <y>306</y>
+     <x>419</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>320</x>
@@ -601,8 +615,8 @@
    <slot>on_add_command()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>297</x>
-     <y>601</y>
+     <x>460</x>
+     <y>572</y>
     </hint>
     <hint type="destinationlabel">
      <x>297</x>
@@ -617,8 +631,8 @@
    <slot>on_pitch_up()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>106</x>
-     <y>413</y>
+     <x>127</x>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>106</x>
@@ -633,8 +647,8 @@
    <slot>on_pitch_reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>230</x>
-     <y>411</y>
+     <x>277</x>
+     <y>323</y>
     </hint>
     <hint type="destinationlabel">
      <x>236</x>
@@ -649,12 +663,44 @@
    <slot>on_pitch_down()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>347</x>
-     <y>411</y>
+     <x>449</x>
+     <y>323</y>
     </hint>
     <hint type="destinationlabel">
      <x>358</x>
      <y>474</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bSimulation</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_simulation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>688</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>665</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bPushToDrone</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_push_to_drone()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>644</x>
+     <y>688</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>524</x>
+     <y>631</y>
     </hint>
    </hints>
   </connection>
@@ -673,5 +719,7 @@
   <slot>on_pitch_up()</slot>
   <slot>on_pitch_down()</slot>
   <slot>on_pitch_reset()</slot>
+  <slot>on_push_to_drone()</slot>
+  <slot>on_simulation()</slot>
  </slots>
 </ui>
