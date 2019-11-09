@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'PySide2GUI/ui/WubaGUI.ui',
 # licensing of 'PySide2GUI/ui/WubaGUI.ui' applies.
 #
-# Created: Sat Nov  9 17:28:11 2019
+# Created: Sat Nov  9 18:39:23 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -229,9 +229,6 @@ class Ui_MainWindow(object):
         self.bAddCommand.setObjectName("bAddCommand")
         self.hCommands.addWidget(self.bAddCommand)
         self.gRoot.addLayout(self.hCommands, 2, 0, 1, 1)
-        self.wMatPlotLib = QtWidgets.QWidget(self.gridLayoutWidget)
-        self.wMatPlotLib.setObjectName("wMatPlotLib")
-        self.gRoot.addWidget(self.wMatPlotLib, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.sbStatusBar = QtWidgets.QStatusBar(MainWindow)
         self.sbStatusBar.setObjectName("sbStatusBar")

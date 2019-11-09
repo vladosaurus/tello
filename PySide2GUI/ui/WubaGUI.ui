@@ -410,9 +410,6 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="1">
-      <widget class="QWidget" name="wMatPlotLib" native="true"/>
-     </item>
     </layout>
    </widget>
   </widget>
