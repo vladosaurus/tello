@@ -153,17 +153,20 @@ if __name__ == "__main__":
     for clean_cmd in clean_cmds:
         try:
             if len(clean_cmd.split()) == 1:
-                tello.send_command(command(bytes(no_params(clean_cmd), 'utf-8')))
+                #tello.send_command(command(bytes(no_params(clean_cmd), 'utf-8')))
+                tello.send_command(no_params(clean_cmd))
 
             elif len(clean_cmd.split()) == 2:
                 cmd, num = clean_cmd.split()
                 if cmd in ['cw', 'ccw']:
-                    tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
+                    #tello.send_command(command(bytes(angles(cmd, num), 'utf-8')))
+                    tello.send_command(angles(cmd, num))
 
 
             elif len(clean_cmd.split()) == 5:
                 cmd, x, y, z, speed = clean_cmd.split()
-                tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
+                #tello.send_command(command(bytes(movements(x, y, z, speed), 'utf-8')))
+                tello.send_command(movements(x, y, z, speed))
 
 
         except KeyboardInterrupt:
