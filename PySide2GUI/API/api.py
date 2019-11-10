@@ -1,8 +1,6 @@
 from .tello import Tello
-import sys
 import os
 from datetime import datetime
-import time
 
 start_time = str(datetime.now())
 
@@ -39,12 +37,11 @@ class API:
         If input is string('cw'/'ccw') use var degr
         """
         return {
-            'cw': f'cw {degr}',
-            'ccw': f'ccw {degr}'
+            'cw': f'cw {degr}'
         }.get(t_mov, 'Incorrect command')
 
     @staticmethod
-    def no_params(t_mov):
+    def command_no_params(t_mov):
         """
         Input for this function is single param (command, takeoff, land)
         """
