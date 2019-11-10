@@ -45,11 +45,11 @@ def create_circle(center_x=0 , center_y=0, radius=1):
 
     distance, path = fastdtw(best_points, bad_points)
 
-    print(distance)
+    print(distance, path)
 
     distance, path = fastdtw(best_points, worst_points)
 
-    print(distance)
+    print(distance, path)
 
     plt.show()
     # print(points)
