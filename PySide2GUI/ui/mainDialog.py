@@ -137,7 +137,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if command_values[0] == "go":
                 self.plot.command_go(*[int(c) for c in command_values[1:4]])
             elif command_values[0] == "cw":
-                self.plot.command_rotate(*command_values)
+                self.plot.command_rotate(command_values[0], int(command_values[1]))
 
 
     def on_push_to_drone(self):
