@@ -51,13 +51,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # ------------------------
 
     def on_turn_left(self):
-        # NOTE: Is rotation to left in negative?
-        # coord = (0, 0, self.VERTICAL_MOVE)
-        # self.plot.command_go(*coord)
-        self.append_command(self.api.command_rotation("ccw", self.ROTATION_MOVE))
+        cmd = 'cw'
+        rotation = (cmd, -self.ROTATION_MOVE)
+        self.plot.command_rotate(*rotation)
+        self.append_command(self.api.command_rotation(*rotation))
 
     def on_turn_right(self):
-        rotation = ("cw", self.ROTATION_MOVE)
+        cmd = 'cw'
+        rotation = (cmd, self.ROTATION_MOVE)
         self.plot.command_rotate(*rotation)
         self.append_command(self.api.command_rotation(*rotation))
 
