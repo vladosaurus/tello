@@ -14,6 +14,7 @@ class Population:
         self.matingpool = []
         self.test_data = test_data
         self.max_fitness = 1
+        self.best = 0
 
         for i in range(0, self.population_size, 1):
             self.population.append(Dron(test_data))
@@ -31,19 +32,20 @@ class Population:
                 # if i:
                 #     for pop in self.population:
                 #         #print(self.population)
-                #         #print('Genes?', pop.get_dna().get_genes().T)
+                #         print('Genes?', pop.get_dna().get_genes()[:, :-1].T)
                 #         plt.plot(*pop.get_dna().get_genes()[:, :-1].T)
                 #         #print('test_data', self.test_data)
                 #         plt.plot(*self.test_data.T)
                 #     plt.show()
                 # break
-                if (self.max_fitness > 100):
+                if (self.max_fitness > 20):
                     for pop in self.population:
                         plt.plot(*pop.get_dna().get_genes()[:, :-1].T)
                     plt.show()
 
     def evaluate_fitness(self):
         maxfit = 0
+        self.best = 0
         # Iterate through all rockets and calcultes their fitness
         for i in range(0, len(self.population)-1):
             # calculate fitness
@@ -53,6 +55,7 @@ class Population:
 
             if (self.population[i].get_fitness() > maxfit):
                 maxfit = self.population[i].get_fitness()
+                self.best = i
                 self.max_fitness = maxfit
 
         for i in range(0, len(self.population)-1):
@@ -62,41 +65,67 @@ class Population:
 
         for i in range(0, len(self.population)-1):
 
-            n = int(self.population[i].get_fitness() * 100)
+            if i == self.best:
+                #print('best')
+                n = int(self.population[i].get_fitness() * 200)
+                # import sys
+                # sys.exit()
+
+            else:
+                self.population[i]._fitness = self.population[i]._fitness * 0.5
+                n = int(self.population[i].get_fitness() * 100)
 
             for j in range(0, n, 1):
 
                 self.matingpool.append(self.population[i])
 
+        # print('best', best)
+        # import sys
+        # sys.exit()
+
+        #print('mating pool', len(self.matingpool))
+
     def natural_selection(self):
         new_population = []
 
         for i in (0, len(self.population)):
-            # pick random DNA
-            parentA = random.choice(self.matingpool).get_dna()
-            parentB = random.choice(self.matingpool).get_dna()
-            # Create child by crossover
-            #child_dna = Dna()
-            child_genes = parentA.crossover(parentB)
-            # child_dna.reset_commands(child_genes)
+            if i == self.best:
+                child = self.population[i]
+            else:
+                # pick random DNA
+                parentA = random.choice(self.matingpool).get_dna()
+                parentB = random.choice(self.matingpool).get_dna()
+                # Create child by crossover
+                #child_dna = Dna()
+                orig_child_genes = parentA.crossover(parentB)
+                # print('TEST_OUR_PRE!', child_genes)
+                # child_dna.reset_commands(child_genes)
 
-            #print('child', child_genes)
-            # import sys
-            # sys.exit("Error message")
-            #mute = Dna.mutation(child)
-            # print(child_genes)
-            # print(child_dna)
-            # print(child_dna.get_commands())
+                #print('child', child_genes)
+                # import sys
+                # sys.exit("Error message")
+                #mute = Dna.mutation(child)
+                # print(child_genes)
+                # print(child_dna)
+                # print(child_dna.get_commands())
 
-            child = Dron(self.test_data)
-            child.set_commands(child_genes)
-            #print('TEST_OUR', our)
+                #child = Dron(self.test_data)
+                
+                child_genes = self.population[i]._dna.mutation(orig_child_genes)
+                # numpy.testing.assert_equal
+                print(numpy.array_equal(orig_child_genes, child_genes))
+                # print('TEST_OUR', child_genes)
+                # import sys
+                # sys.exit("Error message")
+                # child.set_commands(child_genes)
+            
 
             #print('TEST', Dron(self.test_data).set_commands(child_genes))
             new_population.append(
                 child)
             #print('new_pop', new_population)
         #print('before selection', self.population)
+        self.matingpool = []
         self.population = new_population
 
 
@@ -127,8 +156,7 @@ class Dron:
         distance, path = fastdtw(
             self.test_data, numpy.array(self.get_dna().get_genes())[:, :-1])
         # First iteration of fitness
-        #print('distance', distance)
-        self._fitness = 20000 / (distance * 2)
+        self._fitness = 400000 / (distance * 2)
 
 
 class Dna:
@@ -139,7 +167,8 @@ class Dna:
         self.genes_length = 50
         self.lifespan = False
         self.count = 0
-        self.genes = numpy.array([[1, 0, 0]])
+        self.genes = numpy.array([[75, 0, 0]])
+        self.recall = False
 
         # Commands issued to drone
         self.issued_commands = []
@@ -153,7 +182,7 @@ class Dna:
         if (commands is not None):
             # print()
             if len(commands):
-                
+
                 #self.genes = genes
                 #print('do we inherit', commands)
                 # import sys
@@ -176,7 +205,7 @@ class Dna:
                 self.lifespan = True
         else:
             for i in range(1, self.genes_length, 1):
-                #print(i)
+                # print(i)
                 self.count += 1
                 random.choice(self.my_list)(
                     numpy.random.randint(20, 40), numpy.random.randint(20, 40), numpy.random.randint(-30, 30))
@@ -220,13 +249,15 @@ class Dna:
         # sys.exit("Error message")
         return new_genes
 
-    @staticmethod
-    def mutation(self):
-        for i in range(0, len(self.genes)-1):
+    def mutation(self, genes):
+        for i in range(0, len(genes)-1):
             # 1% chance to evolve
-            if (numpy.random.uniform() < 0.01):
-                # print(Dna.genes[i])
-                self.genes[i] = self._select_random_function()
+            if (numpy.random.uniform() < 0.05):
+                print('It is mutating!')
+                random.choice([self.command_rotate, self.command_move])(
+                    numpy.random.randint(20, 40), numpy.random.randint(20, 40), numpy.random.randint(-30, 30), True)
+                genes[i] = self.recall
+        return genes
 
     def translate_to_dronish(self):
         return '\n'.join(self.issued_commands)
@@ -236,15 +267,20 @@ class Dna:
     def command_move(self, *args):  # x, y, z=0):
         x = args[0]
         y = args[1]
-        #print(x)
-        #print(y)
+        # print(x)
+        # print(y)
         # we dont use Z for simulation, for now 2D
         r_x, r_y = self._calculate_rotation_xy(x, y)
 
         self.genes = numpy.vstack(
             (self.genes, numpy.array([r_x, r_y, self.genes[-1][2]])))
 
-        self.called_commands.append(['move', x, y])
+        if len(args) == 4:
+            print('True')
+            self.recall = numpy.array(['move', x, y])
+        else:
+            print('Lie')
+            self.called_commands.append(['move', x, y])
         #print('move', self.called_commands)
 
         self.issued_commands.append(f'go {x} {y} 0 60')
@@ -273,7 +309,12 @@ class Dna:
         # TODO: rotation clockwise, counterclockwise? or can they take negative? @Matej
         self.genes[-1, 2] = self._normalize_rotation(self.genes[-1][2] + deg)
 
-        self.called_commands.append(['rotate', deg])
+        if len(args) == 4:
+            print('True')
+            self.recall = numpy.array(['rotate', deg])
+        else:
+            print('Lie')
+            self.called_commands.append(['rotate', deg])
         #print('rotate', self.called_commands)
 
         self.issued_commands.append(f'cw {deg}')
@@ -299,6 +340,6 @@ class TestCurve:
 
 
 if __name__ == '__main__':
-    test_data = TestCurve.create_circle(0, 0, 300)
+    test_data = TestCurve.create_circle(0, 0, 75)
     population = Population(test_data)
     population.print_plot()
