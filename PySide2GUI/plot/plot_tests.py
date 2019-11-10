@@ -33,7 +33,7 @@ class TestGraph(TestCase):
     def test_receive_rotation_below_zero(self):
         drone = plot.Drone()
 
-        drone.receive_roration(-30)
+        drone.receive_rotation(-30)
 
         numpy.testing.assert_equal(drone.get_current_rotation(), -30)
 
@@ -41,14 +41,23 @@ class TestGraph(TestCase):
     def test_receive_rotation_above_180(self):
         drone = plot.Drone()
 
-        drone.receive_roration(190)
+        drone.receive_rotation(190)
 
         numpy.testing.assert_equal(drone.get_current_rotation(), -170)
 
     def test_receive_rotation_above_360(self):
         drone = plot.Drone()
 
-        drone.receive_roration(370)
+        drone.receive_rotation(370)
 
         numpy.testing.assert_equal(drone.get_current_rotation(), 10)
+
+    def test_arctan(self):
+        x = 1
+        y = 0
+
+        print(numpy.arctan(y/x))
+
+        # Expected angle of 0 rad
+        numpy.testing.assert_equal(int(numpy.arctan(y/x)), 0)
 

@@ -30,8 +30,10 @@ class Drone:
         return self.current_rotation
 
     def receive_go(self, x: int, y: int, z: int):
-        self.current_coordinates[0] += x
-        self.current_coordinates[1] += y
+        # calculate global x and y movement per curent rotation
+        r_x, r_y = self._calculate_rotation_xy(x, y)
+        self.current_coordinates[0] += r_x
+        self.current_coordinates[1] += r_y
         self.current_coordinates[2] += z
 
         self.trajectory = numpy.vstack(
@@ -48,25 +50,46 @@ class Drone:
 
         return angle
 
-    def receive_roration(self, deg: int):
-        self.current_rotation = self._normalize_rotation(deg)
+    def _calculate_rotation_xy(self, x, y):
+        radians = numpy.radians(self.current_rotation)
+        c, s = numpy.cos(radians), numpy.sin(radians)
+        j = numpy.matrix([[c, s], [-s, c]])
+        m = numpy.dot(j, [x, y])
+
+        return float(m.T[0]), float(m.T[1])
+
+    def receive_rotation(self, deg: int):
+        self.current_rotation = self._normalize_rotation(self.current_rotation + deg)
 
 
 class PlotWindow(FigureCanvas):  # Class for 3D window
     def __init__(self):
-        self.fig = plt.figure(figsize=(7, 7))
-        FigureCanvas.__init__(self, self.fig)  # creating FigureCanvas
-        self.axes = self.fig.gca(projection='3d')  # generates 3D Axes object
+        self.fig = plt.figure()
+        FigureCanvas.__init__(self, self.fig)
+        self.axes = self.fig.gca(projection='3d', proj_type = 'ortho')
+
+        # NOTE: This is not implemented yet in API for 3d plots
+        # plt.gca().set_aspect('equal', adjustable='box')
 
         self.axes.set_xlabel('X axis')
         self.axes.set_ylabel('Y axis')
         self.axes.set_zlabel('Z axis')
 
-    def draw_plot(self, x: int, y: int, z: int):  # Fun for Graph plotting
+    def draw_plot(self, x: int, y: int, z: int):
         self.axes.clear()
         self.axes.plot(x, y, z, marker='x')
-        # self.axes.plot_surface(x, y, z) #plots the 3D surface plot
+        # self.set_equal_axis(x, y, z)
         self.draw()
+
+    # def set_equal_axis(self, X, Y, Z):
+    #     max_range = numpy.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max() / 2.0
+
+    #     mid_x = (X.max()+X.min()) * 0.5
+    #     mid_y = (Y.max()+Y.min()) * 0.5
+    #     mid_z = (Z.max()+Z.min()) * 0.5
+    #     self.axes.set_xlim(mid_x - max_range, mid_x + max_range)
+    #     self.axes.set_ylim(mid_y - max_range, mid_y + max_range)
+    #     self.axes.set_zlim(mid_z - max_range, mid_z + max_range)
 
 
 class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is been embedded
@@ -86,10 +109,13 @@ class PlotWidget(QtWidgets.QWidget):  # The QWidget in which the 3D window is be
     def command_go(self, x=10, y=10, z=10):
         self.drone.receive_go(x, y, z)
         coords = self.drone.get_trajectory()
-        self.plot.draw_plot(*coords)  # call Fun for Graph plot
+        self.plot.draw_plot(*coords)
 
-    def command_rotate(self, rotation: int):
+    def command_rotate(self, command: str, rotation: int):
         print('Rotating...')
+        print(self.drone.get_current_rotation())
+        self.drone.receive_rotation(rotation)
+
 
     def reset(self):
         self.drone = Drone()
