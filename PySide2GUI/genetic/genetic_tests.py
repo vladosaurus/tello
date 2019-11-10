@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # from scipy.spatial.distance import euclidean
 from fastdtw import fastdtw
 
-def create_circle(center_x=0 , center_y=0, radius=1):
+def create_circle(center_x=0 , center_y=0, radius=500):
     ''' testing code for equality to calculate validity and weight of gen alg
     
     :param center_x: center x-axis coord, defaults to 0
