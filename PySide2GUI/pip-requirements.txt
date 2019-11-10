@@ -3,3 +3,5 @@ PySide2
 image
 numpy
 matplotlib
+# implementation of Dynamic Time Warping
+fastdtw
