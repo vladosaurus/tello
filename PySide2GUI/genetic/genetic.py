@@ -1,23 +1,48 @@
 import numpy
 import random
+import matplotlib.pyplot as plt
 
+
+class Population:
+    def __init__(self):
+        self.population_size = 20
+        self.population = []
+
+        for i in range(0, self.population_size, 1):
+            self.population.append(Dron())
+
+        #print(self.drons)
+
+    def print_plot(self):
+        for pop in self.population:
+            plt.plot(*pop.get_dna()[:,:-1].T)
+        plt.show()
+
+class Dron:
+    def __init__(self):
+        self.dna = Dna()
+
+    def get_dna(self):
+        return self.dna.get_dna()
 
 class Dna:
     def __init__(self):
-        # x y rotation
-        self.dna = numpy.array([[0, 0, 0]])
-        #print(self.dna[-1][2])
+        # x y current_rotation
+        # start at beginning of curve, for test circle
+        self.lifespan = 100
+        self.dna = numpy.array([[1, 0, 0]])
+        self.issued_commands = []
 
-        for i in range(1, 10, 1):
+        for i in range(1, self.lifespan, 1):
             self.my_list = [self.command_rotate(numpy.random.randint(0, 359)), self.command_move(
                 numpy.random.randint(10, 100), numpy.random.randint(10, 100))]
-            #print(self.my_list)
-            print('----')
             self._select_random_function()
 
-    def translate_to_dronish(self):
-        # TODO: return textfile for dron in dronish
+    def get_dna(self):
         return self.dna
+
+    def translate_to_dronish(self):
+        return '\n'.join(self.issued_commands)
 
     # allowed commands
 
@@ -27,6 +52,8 @@ class Dna:
 
         self.dna = numpy.vstack(
             (self.dna, numpy.array([r_x, r_y, self.dna[-1][2]])))
+
+        return f'go {x} {y} 0 60'
 
     @staticmethod
     def _normalize_rotation(deg: int):
@@ -48,16 +75,15 @@ class Dna:
         return float(m.T[0]), float(m.T[1])
 
     def command_rotate(self, deg: int):
-        #self.current_rotation = self._normalize_rotation(self.current_rotation + deg)
-        print(self.dna[-1])
-        print(deg)
-        print(self._normalize_rotation(self.dna[-1][2] + deg))
+        # TODO: rotation clockwise, counterclockwise? or can they take negative? @Matej
         self.dna[-1, 2] = self._normalize_rotation(self.dna[-1][2] + deg)
+        return f'cw {deg}'
 
     def _select_random_function(self):
-        random.choice(self.my_list)
+        selected = random.choice(self.my_list)
+        self.issued_commands.append(selected)
 
 
 if __name__ == '__main__':
-    dna = Dna()
-    print(dna.translate_to_dronish())
+    population = Population()
+    population.print_plot()
