@@ -13,28 +13,77 @@ class Population:
         for i in range(0, self.population_size, 1):
             self.population.append(Dron())
 
-        # print(self.drons)
-
     def print_plot(self):
+        self.evaluate_fitness()
+        self.natural_selection()
         for pop in self.population:
             plt.plot(*pop.get_dna()[:, :-1].T)
         plt.show()
 
+    def evaluate_fitness(self):
+        maxfit = 0
+        # Iterate through all rockets and calcultes their fitness
+        for i in self.population:
+            # calculate fitness
+            self.population[i].calculate_fitness()
+
+            # normalize fitness
+
+            if (self.population[i].get_fitness > maxfit):
+                maxfit = self.population[i].get_fitness
+
+        for i in self.population:
+            self.population[i].set_fitness(maxfit)
+
+        self.matingpool = []
+        # Take population fitness  and scale it from 1 to 100
+
+        for i in self.population:
+            n = int(self.population[i].get_fitness() * 100)
+            for j in range(0, n, 1):
+                self.matingpool.append(self.population[i])
+
+    def natural_selection(self):
+        new_population = []
+
+        for i in self.population:
+            # pick random DNA
+            parentA = random.choice(self.matingpool).dna
+            parentB = random.choice(self.matingpool).dna
+            # Create child by crossover
+            child = parentA.crossover(parentB)
+            child.mutation()
+
+            new_population.append(Dron(child))
+
+        self.population = new_population
+
 
 class Dron:
-    def __init__(self):
-        self.dna = Dna()
+    def __init__(self, commands=None):
+        self._dna = Dna(commands=commands)
+        self._fitness = 0
 
     def get_dna(self):
-        return self.dna.get_dna()
+        return self._dna.get_dna()
+
+    def get_fitness(self):
+        return self._fitness
+
+    def set_fitness(self, maxfit):
+        self._fitness /= maxfit
+
+    def calculate_fitness(self):
+        return
 
 
 class Dna:
-    def __init__(self, genes=None, commands=[['move', 10, 20], ['rotate', 30], ['move', 10, 10]]):
-        # def __init__(self, genes=None, commands=None):
+    #def __init__(self, commands=[['move', 10, 20], ['rotate', 30], ['move', 10, 10]]):
+    def __init__(self, genes=None, commands=None):
         # x y current_rotation
         # start at beginning of curve, for test circle
-        self.lifespan = 100
+        self.lifespan = 40
+        self.count = 0
         self.genes = numpy.array([[1, 0, 0]])
         self.issued_commands = []
         # Commands called from the list!
@@ -45,18 +94,23 @@ class Dna:
             self.old_called_commands = commands
 
             for i in self.old_called_commands:
+                self.count += 0
                 if i[0] == 'move':
                     self.command_move(i[1], i[2])
                 elif i[0] == 'rotate':
                     self.command_rotate(i[1])
         else:
             for i in range(1, self.lifespan, 1):
+                self.count += 1
                 self.my_list = [self.command_rotate(numpy.random.randint(0, 359)), self.command_move(
                     numpy.random.randint(10, 100), numpy.random.randint(10, 100))]
                 self._select_random_function()
 
     def get_dna(self):
         return self.genes
+
+    def get_count(self):
+        return self.count
 
     def crossover(self):
         # TODO
