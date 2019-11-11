@@ -14,38 +14,31 @@ class Population:
         self.matingpool = []
         self.test_data = test_data
         self.max_fitness = 1
-        self.best = 0
+        self.best = None
 
         for i in range(0, self.population_size, 1):
             self.population.append(Dron(test_data))
-        #print('expected population size:', self.population_size)
-        #print('created pop len:', len(self.population))
 
     def print_plot(self):
-        while True:
-            # i = True
+        #while True:
+        generation = 100
+
+        for i in range(0, generation):
             if all(item.get_dna().get_lifespan() == True for item in self.population):
                 self.evaluate_fitness()
                 self.natural_selection()
                 print('max fitness', self.max_fitness)
                 print('----------------------\n')
-                # if i:
-                #     for pop in self.population:
-                #         #print(self.population)
-                #         print('Genes?', pop.get_dna().get_genes()[:, :-1].T)
-                #         plt.plot(*pop.get_dna().get_genes()[:, :-1].T)
-                #         #print('test_data', self.test_data)
-                #         plt.plot(*self.test_data.T)
-                #     plt.show()
-                # break
-                if (self.max_fitness > 20):
-                    for pop in self.population:
-                        plt.plot(*pop.get_dna().get_genes()[:, :-1].T)
-                    plt.show()
+        
+        #if (self.max_fitness > 20):
+
+        for pop in self.population:
+            plt.plot(*pop.get_dna().get_genes()[:, :-1].T)
+            plt.show()
 
     def evaluate_fitness(self):
         maxfit = 0
-        self.best = 0
+        self.best = None
         # Iterate through all rockets and calcultes their fitness
         for i in range(0, len(self.population)-1):
             # calculate fitness
@@ -62,69 +55,42 @@ class Population:
             self.population[i].set_fitness(maxfit)
 
         # Take population fitness  and scale it from 1 to 100
-
         for i in range(0, len(self.population)-1):
 
             if i == self.best:
-                #print('best')
-                n = int(self.population[i].get_fitness() * 200)
-                # import sys
-                # sys.exit()
+                # Give the best a bit bigger chance to mate
+                n = int(self.population[i].get_fitness() * 125)
 
             else:
-                self.population[i]._fitness = self.population[i]._fitness * 0.5
+                # self.population[i]._fitness = self.population[i]._fitness * 0.5
                 n = int(self.population[i].get_fitness() * 100)
 
             for j in range(0, n, 1):
 
                 self.matingpool.append(self.population[i])
 
-        # print('best', best)
-        # import sys
-        # sys.exit()
-
-        #print('mating pool', len(self.matingpool))
-
     def natural_selection(self):
         new_population = []
 
-        for i in (0, len(self.population)):
+        i = 0
+        for drone in self.population:
             if i == self.best:
-                child = self.population[i]
+                child = drone
             else:
-                # pick random DNA
+                # pick random partners
                 parentA = random.choice(self.matingpool).get_dna()
                 parentB = random.choice(self.matingpool).get_dna()
                 # Create child by crossover
-                #child_dna = Dna()
+
                 orig_child_genes = parentA.crossover(parentB)
-                # print('TEST_OUR_PRE!', child_genes)
-                # child_dna.reset_commands(child_genes)
+                child = Dron(self.test_data)
 
-                #print('child', child_genes)
-                # import sys
-                # sys.exit("Error message")
-                #mute = Dna.mutation(child)
-                # print(child_genes)
-                # print(child_dna)
-                # print(child_dna.get_commands())
+                child_genes = drone._dna.mutation(
+                    orig_child_genes)
 
-                #child = Dron(self.test_data)
-                
-                child_genes = self.population[i]._dna.mutation(orig_child_genes)
-                # numpy.testing.assert_equal
-                print(numpy.array_equal(orig_child_genes, child_genes))
-                # print('TEST_OUR', child_genes)
-                # import sys
-                # sys.exit("Error message")
-                # child.set_commands(child_genes)
-            
-
-            #print('TEST', Dron(self.test_data).set_commands(child_genes))
-            new_population.append(
-                child)
-            #print('new_pop', new_population)
-        #print('before selection', self.population)
+                child.set_commands(child_genes)
+            new_population.append(child)
+            i += 1
         self.matingpool = []
         self.population = new_population
 
@@ -132,7 +98,6 @@ class Population:
 class Dron:
     def __init__(self, test_data, commands=None):
         self._dna = Dna(commands=commands)
-        # print(self._dna)
         self._fitness = 0
         self.test_data = test_data
 
@@ -150,78 +115,64 @@ class Dron:
 
     def set_fitness(self, maxfit):
         self._fitness /= maxfit
-        #print('fitness', self._fitness)
 
     def calculate_fitness(self):
         distance, path = fastdtw(
             self.test_data, numpy.array(self.get_dna().get_genes())[:, :-1])
         # First iteration of fitness
-        self._fitness = 400000 / (distance * 2)
+        self._fitness = 40000 / (distance * 2)
 
 
 class Dna:
-    # def __init__(self, commands=[['move', 10, 20], ['rotate', 30], ['move', 10, 10]]):
     def __init__(self, commands=None):
         # x y current_rotation
-        # start at beginning of curve, for test circle
+        # start at beginning of curve, for test circle - 75
+        self.genes = numpy.array([[75, 0, 0]])
+        self.recall = numpy.array([])
+
         self.genes_length = 50
         self.lifespan = False
         self.count = 0
-        self.genes = numpy.array([[75, 0, 0]])
-        self.recall = False
 
         # Commands issued to drone
         self.issued_commands = []
         # Commands called from the list!
         self.called_commands = []
 
-        # command setting
+        # Available commands in SDK
         self.my_list = [self.command_rotate, self.command_move]
 
-        #print('commands', commands)
         if (commands is not None):
-            # print()
             if len(commands):
-
-                #self.genes = genes
-                #print('do we inherit', commands)
-                # import sys
-                # sys.exit("Error message")
                 self.old_called_commands = commands
-                #print('init1', self.called_commands)
-
-                #print('length', len(self.old_called_commands))
-
                 for i in self.old_called_commands:
-                    #print('we are running child', i)
-                    # print(i)
                     self.count += 0
                     if i[0] == 'move':
-                        self.command_move(i[1], i[2], None)
+                        try:
+                            self.command_move(i[1], i[2], None)
+                        except numpy.core._exceptions.UFuncTypeError as e:
+                            # TODO: Handle further
+                            print(
+                                'Exception - member of numpy array is not a number: ', e)
                     elif i[0] == 'rotate':
                         self.command_rotate(None, None, i[1])
-                # it died\
-                #print('DONE', i)
+                # Too old to live
                 self.lifespan = True
         else:
             for i in range(1, self.genes_length, 1):
-                # print(i)
                 self.count += 1
                 random.choice(self.my_list)(
                     numpy.random.randint(20, 40), numpy.random.randint(20, 40), numpy.random.randint(-30, 30))
-                # self._select_random_function()
-            # it died
+            # Too old to live
             self.lifespan = True
 
     def get_lifespan(self):
         return self.lifespan
 
     def get_genes(self):
-        # print(self.genes)
         return self.genes
 
     def set_commands(self, genes):
-        #self.genes = None
         self.called_commands = genes
 
     def get_commands(self):
@@ -232,28 +183,20 @@ class Dna:
 
     def crossover(self, partner):
         new_genes = []
-        # random mid
+        # Select a random mid
         mid = numpy.floor(numpy.random.randint(len(self.called_commands)))
-        # print(self.called_commands)
-        # print(mid)
+
         for i in range(0, len(self.called_commands), 1):
-            # take one half of genes from partner
             if (i > mid):
                 new_genes.append(self.called_commands[i])
-                #print('my', self.called_commands[i])
             else:
                 new_genes.append(partner.called_commands[i])
-                #print('partner', partner.called_commands[i])
-        # print('new',new_genes)
-        # import sys
-        # sys.exit("Error message")
         return new_genes
 
     def mutation(self, genes):
         for i in range(0, len(genes)-1):
-            # 1% chance to evolve
-            if (numpy.random.uniform() < 0.05):
-                print('It is mutating!')
+            # 2% chance to evolve
+            if (numpy.random.uniform() < 0.02):
                 random.choice([self.command_rotate, self.command_move])(
                     numpy.random.randint(20, 40), numpy.random.randint(20, 40), numpy.random.randint(-30, 30), True)
                 genes[i] = self.recall
@@ -264,11 +207,9 @@ class Dna:
 
     # allowed commands
 
-    def command_move(self, *args):  # x, y, z=0):
-        x = args[0]
-        y = args[1]
-        # print(x)
-        # print(y)
+    def command_move(self, *args):
+        x = int(args[0])
+        y = int(args[1])
         # we dont use Z for simulation, for now 2D
         r_x, r_y = self._calculate_rotation_xy(x, y)
 
@@ -276,12 +217,10 @@ class Dna:
             (self.genes, numpy.array([r_x, r_y, self.genes[-1][2]])))
 
         if len(args) == 4:
-            print('True')
-            self.recall = numpy.array(['move', x, y])
+            # If mutation took a place (funct from random pool was called with fourth  )
+            self.recall = numpy.array(['move', int(x), int(y)])
         else:
-            print('Lie')
-            self.called_commands.append(['move', x, y])
-        #print('move', self.called_commands)
+            self.called_commands.append(['move', int(x), int(y)])
 
         self.issued_commands.append(f'go {x} {y} 0 60')
 
@@ -300,22 +239,26 @@ class Dna:
         radians = numpy.radians(self.genes[-1][2])
         c, s = numpy.cos(radians), numpy.sin(radians)
         j = numpy.matrix([[c, s], [-s, c]])
-        m = numpy.dot(j, [x, y])
-
-        return float(m.T[0]), float(m.T[1])
+        try:
+            m = numpy.dot(j, [x, y])
+            return float(m.T[0]), float(m.T[1])
+        # TODO: This should not be generic, we should handle failures
+        except Exception as e:
+            print(j, [x, y])
 
     def command_rotate(self, *args):  # deg: int):
-        deg = args[2]
-        # TODO: rotation clockwise, counterclockwise? or can they take negative? @Matej
-        self.genes[-1, 2] = self._normalize_rotation(self.genes[-1][2] + deg)
-
+        deg = int(args[2])
+        # We can rotatce clockwise (cw) with negative as counterclockwise (ccw), we are skipping ccw
+        try:
+            self.genes[-1,
+                       2] = self._normalize_rotation(self.genes[-1][2] + deg)
+        except numpy.core._exceptions.UFuncTypeError as e:
+            print('Exception - Cannot normalize, numpy array member is not a number:', e)
         if len(args) == 4:
-            print('True')
-            self.recall = numpy.array(['rotate', deg])
+            # If mutation took a place (funct from random pool was called with fourth  )
+            self.recall = numpy.array(['rotate', int(deg)])
         else:
-            print('Lie')
-            self.called_commands.append(['rotate', deg])
-        #print('rotate', self.called_commands)
+            self.called_commands.append(['rotate', int(deg)])
 
         self.issued_commands.append(f'cw {deg}')
 
